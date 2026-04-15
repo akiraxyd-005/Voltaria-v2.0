@@ -213,3 +213,54 @@ voltaria-nexus/
 ├── 📁 store/                   # Runtime data storage
 ├── 📁 session/                 # WhatsApp auth credentials
 └── 📁 tmp/                     # Temporary media files
+
+Step 2: Install Dependencies
+
+```bash
+npm install
+```
+
+Step 3: Configure Environment
+
+Create a .env file in the root directory:
+
+```env
+# Required
+MONGODB_URI=mongodb+srv://username:password@cluster.xxxxx.mongodb.net/voltaria
+OWNER_NUMBER=254108720384
+OWNER_NAME=⚜️𝓐𝓻𝓪𝓼𝓱𝓲⚜️
+
+# Optional (for AI features)
+OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Optional (for weather)
+WEATHER_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Optional (for media download)
+YOUTUBE_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+Step 4: Build & Run
+
+```bash
+# Development mode
+npm run dev
+
+# Production build
+npm run build
+npm start
+
+# Using PM2 (recommended for production)
+npm run pm2:start
+npm run pm2:logs
+```
+
+Step 5: Connect WhatsApp
+
+1. Run the bot
+2. QR code will appear in terminal
+3. Open WhatsApp on your phone
+4. Go to Settings → Linked Devices → Link a Device
+5. Scan the QR code
+6. Wait for "Bot Connected Successfully" message
+7. 
