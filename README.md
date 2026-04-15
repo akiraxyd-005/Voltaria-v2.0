@@ -227,7 +227,7 @@ Create a .env file in the root directory:
 ```env
 # Required
 MONGODB_URI=mongodb+srv://username:password@cluster.xxxxx.mongodb.net/voltaria
-OWNER_NUMBER=254108720384
+OWNER_NUMBER=xxxxxxxxxxx
 OWNER_NAME=⚜️𝓐𝓻𝓪𝓼𝓱𝓲⚜️
 
 # Optional (for AI features)
