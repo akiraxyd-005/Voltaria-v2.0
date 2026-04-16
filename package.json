@@ -1,0 +1,43 @@
+{
+  "name": "voltaria-nexus",
+  "version": "1.0.0",
+  "description": "✦⚡ Voltaria Nexus ⚡✦ - A Powerful WhatsApp Bot with Economy, Games & Moderation",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx index.ts",
+    "build": "tsc",
+    "clean": "rm -rf dist session",
+    "pm2:start": "pm2 start dist/index.js --name voltaria-nexus",
+    "pm2:stop": "pm2 stop voltaria-nexus",
+    "pm2:restart": "pm2 restart voltaria-nexus"
+  },
+  "keywords": ["whatsapp-bot", "economy-bot", "baileys", "voltaria"],
+  "author": "⚜️𝓐𝓻𝓪𝓼𝓱𝓲⚜️",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.5",
+    "qrcode-terminal": "^0.12.0",
+    "@hapi/boom": "^10.0.1",
+    "pino": "^8.15.0",
+    "mongoose": "^8.0.0",
+    "dotenv": "^16.3.0",
+    "axios": "^1.6.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "chalk": "^5.3.0",
+    "figlet": "^1.6.0",
+    "fs-extra": "^11.1.1",
+    "sharp": "^0.33.0",
+    "qr-image": "^3.2.0",
+    "uuid": "^9.0.1",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0",
+    "@types/node": "^20.0.0",
+    "@types/uuid": "^9.0.7"
+  }
+}
