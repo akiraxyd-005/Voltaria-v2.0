@@ -37,10 +37,6 @@ module.exports = {
             }
         }
         
-        // Also check childParents for direct lookup
-        let childParents = {};
-        if (fs.existsSync('./database/childparents.json')) childParents = JSON.parse(fs.readFileSync('./database/childparents.json'));
-        
         let childList = '';
         if (children.length === 0) {
             childList = '   *No adopted children yet*';
@@ -54,7 +50,7 @@ module.exports = {
 ║  👨‍👩‍👧  *YOUR FAMILY*  👨‍👩‍👧  ║
 ╚═══════════════════════╝
 
-💍 *Spouse:* ${spouse}
+💔 *Spouse:* ${spouse}
 
 👶 *Adopted Children (${children.length}/2):*
 ${childList}`;
