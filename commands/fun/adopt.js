@@ -3,6 +3,7 @@ const relationshipsPath = './database/relationships.json';
 const economyPath = './database/economy.json';
 const adoptionFee = 5000;
 const maxAdoptions = 2;
+const currencySymbol = '𝑵̶';
 
 module.exports = {
     name: 'adopt',
@@ -68,7 +69,7 @@ module.exports = {
         const userMoney = economy[extra.sender]?.balance || 0;
         
         if (userMoney < adoptionFee) {
-            return extra.reply(`❌ Not enough XYLO.\nAdoption fee: *◈ ${adoptionFee.toLocaleString()}*\nYour wallet: *◈ ${userMoney.toLocaleString()}*`);
+            return extra.reply(`❌ Not enough ${currencySymbol} Nex.\nAdoption fee: *${currencySymbol} ${adoptionFee.toLocaleString()}*\nYour wallet: *${currencySymbol} ${userMoney.toLocaleString()}*`);
         }
         
         // Deduct adoption fee
@@ -90,7 +91,7 @@ module.exports = {
         const remainingSlots = maxAdoptions - adoptions[coupleKey].length;
         
         await sock.sendMessage(extra.from, {
-            text: `🎉 *ADOPTION COMPLETE!*\n\n👶 Welcome *@${child.split('@')[0]}* to the family!\n💍 Parents: @${extra.sender.split('@')[0]} & @${spouse.split('@')[0]}\n💸 Adoption fee: *◈ ${adoptionFee.toLocaleString()}*\n\n_${remainingSlots} adoption slot(s) remaining._`,
+            text: `🎉 *ADOPTION COMPLETE!*\n\n👶 Welcome *@${child.split('@')[0]}* to the family!\n💍 Parents: @${extra.sender.split('@')[0]} & @${spouse.split('@')[0]}\n💸 Adoption fee: *${currencySymbol} ${adoptionFee.toLocaleString()}*\n\n_${remainingSlots} adoption slot(s) remaining._`,
             mentions: [child, extra.sender, spouse]
         }, { quoted: msg });
     }
