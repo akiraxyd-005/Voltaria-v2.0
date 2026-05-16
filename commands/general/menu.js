@@ -1,0 +1,123 @@
+const os = require('os');
+const moment = require('moment');
+
+module.exports = {
+    name: 'menu',
+    aliases: ['help', 'commands'],
+    category: 'general',
+    description: 'Show bot menu',
+    async execute(sock, msg, args, extra) {
+        const uptime = process.uptime();
+        const days = Math.floor(uptime / 86400);
+        const hours = Math.floor((uptime % 86400) / 3600);
+        const minutes = Math.floor((uptime % 3600) / 60);
+        
+        const senderName = msg.pushName || 'User';
+        
+        const menuText = `
+╔════════════════════════╗
+║     *⎋Voltaria DASHBOARD⎋*
+╚════════════════════════╝
+ » 👤 *USER:* ${senderName}
+ » 🚀 *UPTIME:* ${days}d ${hours}h ${minutes}m
+ » 🏷️ *PREFIX:* §
+ » 📦 *VERSION:* 3.3.0
+══════════════════════════
+
+┌───⊷ *ai*
+│ ⌘ §agentmode
+│ ⌘ §flux
+│ ⌘ §text2img
+│ ⌘ §wan
+│ ⌘ §gpt
+│ ⌘ §summarize
+│ ⌘ §recipe
+│ ⌘ §chatbot
+│ ⌘ §editimg
+│ ⌘ §upscale
+│ ⌘ §removebg
+│ ⌘ §enhance
+│ ⌘ §sora
+│ ⌘ §gemini
+│ ⌘ §duckai
+│ ⌘ §transcribe
+│ ⌘ §vision
+│ ⌘ §tts
+└──────────────⊷
+
+┌───⊷ *anime*
+│ ⌘ §anime
+│ ⌘ §animequote
+│ ⌘ §waifu
+│ ⌘ §neko
+│ ⌘ §foxxgirl
+│ ⌘ §character
+│ ⌘ §randomanime
+└──────────────⊷
+
+┌───⊷ *economy*
+│ ⌘ §money
+│ ⌘ §rank
+│ ⌘ §daily
+│ ⌘ §work
+│ ⌘ §crime
+│ ⌘ §beg
+│ ⌘ §fish
+│ ⌘ §hunt
+│ ⌘ §pay
+│ ⌘ §rob
+│ ⌘ §coinflip
+│ ⌘ §dice
+│ ⌘ §slots
+│ ⌘ §blackjack
+│ ⌘ §roulette
+│ ⌘ §crash
+│ ⌘ §profile
+└──────────────⊷
+
+┌───⊷ *group*
+│ ⌘ §tagall
+│ ⌘ §hidetag
+│ ⌘ §kick
+│ ⌘ §promote
+│ ⌘ §demote
+│ ⌘ §warn
+│ ⌘ §resetwarn
+│ ⌘ §antilink
+│ ⌘ §antistatus
+│ ⌘ §welcome
+│ ⌘ §goodbye
+│ ⌘ §poll
+└──────────────⊷
+
+┌───⊷ *games*
+│ ⌘ §trivia
+│ ⌘ §ttt
+│ ⌘ §hangman
+│ ⌘ §wordle
+│ ⌘ §riddle
+│ ⌘ §whoami
+└──────────────⊷
+
+┌───⊷ *tools*
+│ ⌘ §afk
+│ ⌘ §calc
+│ ⌘ §sticker
+│ ⌘ §qr
+│ ⌘ §weather
+│ ⌘ §ping
+│ ⌘ §uptime
+└──────────────⊷
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📂 *View a category:*
+  §menu <category>
+
+  🤖 ai  •  🎌 anime  •  💰 economy  •  👥 group  •  🎮 games  •  🔧 tools
+
+> > ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠᴏʟᴛᴀʀɪᴀ
+`;
+        
+        await extra.reply(menuText);
+    }
+};
