@@ -1,5 +1,4 @@
-const fs = require('fs');
-const pkg = require('../../package.json');
+const os = require('os');
 
 module.exports = {
     name: 'botinfo',
@@ -9,33 +8,19 @@ module.exports = {
     usage: '§botinfo',
     async execute(sock, msg, args, extra) {
         const uptime = process.uptime();
-        const days = Math.floor(uptime / 86400);
-        const hours = Math.floor((uptime % 86400) / 3600);
+        const hours = Math.floor(uptime / 3600);
         const minutes = Math.floor((uptime % 3600) / 60);
         
-        let totalCommands = 0;
-        const commandsPath = './commands';
-        if (fs.existsSync(commandsPath)) {
-            const categories = fs.readdirSync(commandsPath);
-            for (const cat of categories) {
-                const catPath = `${commandsPath}/${cat}`;
-                if (fs.statSync(catPath).isDirectory()) {
-                    totalCommands += fs.readdirSync(catPath).filter(f => f.endsWith('.js')).length;
-                }
-            }
-        }
+        const totalMem = (os.totalmem() / 1024 / 1024).toFixed(2);
         
-        const botInfo = `┏━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃  🤖  *BOT INFO*  🤖
-┗━━━━━━━━━━━━━━━━━━━━━━━━┛
+        const botInfo = `◆ *Bot Info*
 
-📛 *Name:* Voltaria
-🔖 *Version:* ${pkg.version || '3.3.0'}
-⚡ *Prefix:* §
-📦 *Commands:* ${totalCommands}+
-👑 *Owner:* Arashi
-
-⏱️ *Uptime:* ${days}d ${hours}h ${minutes}m
+• Name: Voltaria
+• Mode: public
+• Prefix: §
+• Platform: ${os.platform()}
+• Uptime: ${hours} hours ${minutes} minutes
+• Memory: ${totalMem} MB
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 > ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$`;
