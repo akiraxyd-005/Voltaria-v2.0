@@ -1,35 +1,48 @@
+const fs = require('fs');
+const activeGamesPath = './database/activegames.json';
+
 const riddles = [
-    { question: "What has keys but can't open locks?", answer: "piano" },
-    { question: "What has a face and two hands but no arms?", answer: "clock" },
-    { question: "What gets wetter as it dries?", answer: "towel" }
+    { question: "What has keys but can't open locks?", options: ["Piano", "Keyboard", "Map", "Door"], answer: "Piano" },
+    { question: "What has a face and two hands but no arms?", options: ["Clock", "Watch", "Calendar", "Mirror"], answer: "Clock" }
 ];
 
 module.exports = {
     name: 'riddle',
     category: 'games',
-    description: 'Solve riddles fastest - add amount to bet coins',
-    usage: '§riddle 500',
+    description: 'Start Riddle Game',
+    usage: '§riddle',
     isGroup: true,
     async execute(sock, msg, args, extra) {
-        const bet = parseInt(args[0]);
-        const riddle = riddles[Math.floor(Math.random() * riddles.length)];
+        let activeGames = {};
+        if (fs.existsSync(activeGamesPath)) activeGames = JSON.parse(fs.readFileSync(activeGamesPath));
         
-        activeRiddle[extra.from] = {
-            answer: riddle.answer,
-            bet: bet || 0,
-            channel: extra.from,
-            sender: extra.sender,
-            startTime: Date.now()
+        if (activeGames[extra.from]?.riddle) {
+            return extra.reply('⚠️ A game is already running.');
+        }
+        
+        activeGames[extra.from] = {
+            riddle: {
+                status: 'waiting',
+                players: [],
+                startTime: Date.now(),
+                joinDeadline: Date.now() + 45000,
+                round: 0,
+                scores: {}
+            }
         };
         
-        await extra.reply(`🤔 *RIDDLE*\n\n${riddle.question}\n\n${bet ? `💰 Bet: ${currencySymbol} ${bet.toLocaleString()} Nex` : '💰 Friendly match'}\n\nFirst to type the correct answer wins!`);
+        fs.writeFileSync(activeGamesPath, JSON.stringify(activeGames, null, 2));
         
-        setTimeout(() => {
-            if (activeRiddle[extra.from]) {
-                delete activeRiddle[extra.from];
-            }
-        }, 30000);
+        await extra.reply(`┏━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🤔  𝗥𝗜𝗗𝗗𝗟𝗘 𝗚𝗔𝗠𝗘
+┗━━━━━━━━━━━━━━━━━━━━━━┛
+
+  📏 8 rounds  •  🟡 Medium
+  ⏱ 30s per riddle
+  🔤 Answer with A / B / C / D
+
+  ━━━━━━━━━━━━━━━━━━
+  🎮 Type  join  to play
+  ⏳ Starting in 45s...`);
     }
 };
-
-let activeRiddle = {};
