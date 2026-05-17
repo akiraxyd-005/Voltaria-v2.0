@@ -1,29 +1,52 @@
-const words = ['apple', 'mango', 'grape', 'peach', 'berry', 'lemon', 'melon', 'candy', 'sugar', 'honey'];
-const currencySymbol = '𝑵̶';
+const fs = require('fs');
+const words = {
+    easy: { word: 'FLAMINGO', hint: 'A pink bird' },
+    medium: { word: 'FERVORS', hint: '7 letters, starts with F' },
+    hard: { word: 'MYSTERY', hint: 'Something unknown' }
+};
 
 module.exports = {
     name: 'hangman',
     category: 'games',
-    description: 'Play Hangman word guessing - add amount to bet coins',
-    usage: '§hangman 500',
+    description: 'Play Hangman word guessing',
+    usage: '§hangman',
     isGroup: true,
     async execute(sock, msg, args, extra) {
-        const bet = parseInt(args[0]);
-        
-        const word = words[Math.floor(Math.random() * words.length)];
-        const display = '_'.repeat(word.length);
+        const difficulty = args[0]?.toLowerCase() || 'medium';
+        const wordData = words[difficulty] || words.medium;
+        const word = wordData.word;
+        const hint = wordData.hint;
         
         activeHangman[extra.from] = {
             word: word,
-            display: display,
+            display: '_'.repeat(word.length),
             guesses: 6,
             guessedLetters: [],
-            bet: bet || 0,
-            channel: extra.from,
-            sender: extra.sender
+            channel: extra.from
         };
         
-        await extra.reply(`🔤 *HANGMAN*\n\n${bet ? `💰 Bet: ${currencySymbol} ${bet.toLocaleString()} Nex` : '💰 Friendly match'}\n\nWord: ${display.split('').join(' ')}\n\nGuesses left: 6\n\nType a letter to guess!`);
+        const hangmanDisplay = `
+┏━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🪢  𝗛𝗔𝗡𝗚𝗠𝗔𝗡
+┗━━━━━━━━━━━━━━━━━━━━━━┛
+
+  ┌───┐
+  │   │
+  │
+  │
+  │
+══╧══
+
+  📝 Word: ${'_ '.repeat(word.length)}
+  💡 Hint: ${hint}
+  🎯 🟡 ${difficulty.toUpperCase()}
+  ❤️ Lives: 6/6
+
+  ━━━━━━━━━━━━━━━━━━
+  📤 Guess a letter or the full word
+  ⏱ 30s per guess`;
+        
+        await extra.reply(hangmanDisplay);
     }
 };
 
