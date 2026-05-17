@@ -12,24 +12,44 @@ module.exports = {
         if (fs.existsSync(activeGamesPath)) activeGames = JSON.parse(fs.readFileSync(activeGamesPath));
         
         if (activeGames[extra.from]?.wcg) {
-            return extra.reply('❌ A Word Connection Game is already active in this group!');
+            return extra.reply('⚠️ A game is already running.');
         }
-        
-        const words = ['apple', 'fruit', 'banana', 'yellow', 'sun', 'hot', 'cold', 'ice', 'water', 'drink'];
-        const startWord = words[Math.floor(Math.random() * words.length)];
         
         activeGames[extra.from] = {
             wcg: {
-                active: true,
-                currentWord: startWord,
-                lastLetter: startWord.slice(-1),
+                status: 'waiting',
                 players: [],
-                startTime: Date.now()
+                startTime: Date.now(),
+                joinDeadline: Date.now() + 45000
             }
         };
         
         fs.writeFileSync(activeGamesPath, JSON.stringify(activeGames, null, 2));
         
-        await extra.reply(`🎮 *WORD CONNECTION GAME STARTED!*\n\nStarting word: *${startWord}*\n\nNext word must start with the letter *"${startWord.slice(-1)}"*\n\nType any word starting with that letter to continue!\n\n⏱️ Game ends after 30 seconds of no response.`);
+        await extra.reply(`╔═══════════════════╗
+   🔤 *WORD CHAIN GAME* 🔤
+╚═══════════════════╝
+
+📜 *How to Play:*
+┃ ▸ Type a word starting with last letter
+┃ ▸ Must be valid English word
+┃ ▸ Min length increases each round
+┃ ▸ Time gets shorter - stay sharp!
+
+╭─────────────────╮
+│  ✍️ Type *join* now!  │
+│  ⏳ Starting in *45s*...  │
+╰─────────────────╯`);
+        
+        setTimeout(async () => {
+            const game = activeGames[extra.from]?.wcg;
+            if (game && game.status === 'waiting') {
+                if (game.players.length < 2) {
+                    await extra.reply('❌ Not enough players joined.\n_Need at least 2 to start!_');
+                    delete activeGames[extra.from]?.wcg;
+                    fs.writeFileSync(activeGamesPath, JSON.stringify(activeGames, null, 2));
+                }
+            }
+        }, 45000);
     }
 };
