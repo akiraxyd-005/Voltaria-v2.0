@@ -1,25 +1,74 @@
-const wyrQuestions = [
-    "Would you rather be able to fly or be invisible?",
-    "Would you rather travel 100 years into the past or 100 years into the future?",
-    "Would you rather have unlimited money or unlimited time?"
-];
+const fs = require('fs');
+const activeGamesPath = './database/activegames.json';
 
-const wyr18 = [
-    "Would you rather date your ex or be single forever?",
-    "Would you rather give up social media or give up dating apps?"
+const wyrQuestions = [
+    { text: "Would you rather be able to fly or be invisible?" },
+    { text: "Would you rather travel 100 years into the past or 100 years into the future?" }
 ];
 
 module.exports = {
     name: 'wyr',
     category: 'games',
-    description: 'Would You Rather party game — group only. Add "18+" for adult questions',
-    usage: '§wyr | §wyr 18+',
+    description: 'Would You Rather party game',
+    usage: '§wyr',
     isGroup: true,
     async execute(sock, msg, args, extra) {
-        const isAdult = args.includes('18+');
-        const pool = isAdult ? wyr18 : wyrQuestions;
-        const random = pool[Math.floor(Math.random() * pool.length)];
+        let activeGames = {};
+        if (fs.existsSync(activeGamesPath)) activeGames = JSON.parse(fs.readFileSync(activeGamesPath));
         
-        await extra.reply(`🎲 *WOULD YOU RATHER*\n\n${random}${isAdult ? '\n\n🔞 *Adult Content* 🔞' : ''}\n\nReply with your choice!`);
+        if (activeGames[extra.from]?.wyr) {
+            return extra.reply('⚠️ A game is already running.');
+        }
+        
+        const isAdult = args.includes('18+');
+        const rounds = parseInt(args[0]) || 10;
+        
+        activeGames[extra.from] = {
+            wyr: {
+                status: 'waiting',
+                players: [],
+                startTime: Date.now(),
+                joinDeadline: Date.now() + 30000,
+                rounds: rounds,
+                isAdult: isAdult,
+                round: 0,
+                currentQuestion: null
+            }
+        };
+        
+        fs.writeFileSync(activeGamesPath, JSON.stringify(activeGames, null, 2));
+        
+        await sock.sendMessage(extra.from, {
+            text: `┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🤷 𝗪𝗢𝗨𝗟𝗗 𝗬𝗢𝗨 𝗥𝗔𝗧𝗛𝗘𝗥
+┗━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+@${extra.sender.split('@')[0]} started the game!
+
+💬 Type *join* to enter (30s)
+🛑 Type *endwyr* to end anytime
+
+🎯 *${rounds} rounds*
+${isAdult ? '🔞 *Adult Mode* 🔞' : ''}
+
+👥 Players: ${activeGames[extra.from].wyr.players.length}`,
+            mentions: [extra.sender]
+        }, { quoted: msg });
+        
+        setTimeout(async () => {
+            const game = activeGames[extra.from]?.wyr;
+            if (game && game.status === 'waiting' && game.players.length < 2) {
+                await extra.reply(`┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  🤷 𝗪𝗢𝗨𝗟𝗗 𝗬𝗢𝗨 𝗥𝗔𝗧𝗛𝗘𝗥
+┗━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+❌ Not enough players joined!
+Only ${game.players.length}/2 players. Game cancelled.
+
+_Start again with §wyr_`);
+                delete activeGames[extra.from]?.wyr;
+                fs.writeFileSync(activeGamesPath, JSON.stringify(activeGames, null, 2));
+            }
+        }, 30000);
     }
 };
