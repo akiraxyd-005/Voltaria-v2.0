@@ -12,3 +12,11 @@ module.exports = {
         exec('git pull', async (error, stdout, stderr) => {
             if (error) {
                 await extra.reply(`❌ *Update failed*\n\n${error.message}`);
+                return;
+            }
+            
+            await extra.reply(`✅ *Update successful!*\n\n${stdout}\n\nRestarting bot...`);
+            process.exit(0);
+        });
+    }
+};
