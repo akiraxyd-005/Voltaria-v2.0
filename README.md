@@ -263,4 +263,4 @@ Step 5: Connect WhatsApp
 4. Go to Settings → Linked Devices → Link a Device
 5. Scan the QR code
 6. Wait for "Bot Connected Successfully" message
-7. 
+
