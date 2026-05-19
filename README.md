@@ -1,3 +1,5 @@
+
+```markdown
 <p align="center">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
     <img src="main/assets/voltaria-banner.png" width="100%">
@@ -149,10 +151,16 @@ Lost your session? Delete the session folder and restart.
 
 ---
 
- 👥 Credits
+👥 Credits
 
 · Inspired by: Atlas MD by FantoX & Team Atlas
 · Built with: Baileys
+
+---
+
+Role Name GitHub
+Developer Arashi @Arashi005
+Contributor akiraxyd @akiraxyd-005
 
 ---
 
@@ -173,3 +181,4 @@ MIT License
 <p align="center">
   <b>©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$</b>
 </p>
+```
