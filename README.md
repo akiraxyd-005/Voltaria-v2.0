@@ -1,266 +1,234 @@
-# ✦⚡ VOLTARIA NEXUS ⚡✦
-### *A Powerful WhatsApp Bot with Economy, Games & Moderation*
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![Node](https://img.shields.io/badge/node-%3E%3D20.0-green)
-![WhatsApp](https://img.shields.io/badge/WhatsApp-Multi--Device-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-yellow)
+<p align="center">
+  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
+    <img src="assets/voltaria-banner.png" width="100%">
+  </a>
+</p>
 
----
+<h1 align="center">⚡ VOLTARIA NEXUS ⚡</h1>
 
-## 🌟 Features
+<p align="center">
+  <i>A Powerful WhatsApp Bot with Economy, Gambling, Games & Moderation — built with Baileys Multi-Device for maximum stability and features.</i>
+</p>
 
-### 💰 **Economy System**
-- Complete virtual currency system (V-Coins ¢)
-- Daily & Weekly rewards with streak bonuses
-- Work & Crime commands for earning
-- Bank system with interest and capacity upgrades
-- Shop with permanent items, boosts, and VIP membership
-- Transfer money between users
-- Rob other users with chance-based system
-- Leaderboard rankings (wealth, level, work, robberies)
+<p align="center">
+  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0/fork">
+    <img src="https://img.shields.io/github/forks/akiraxyd-005/Voltaria-v2.0?label=Fork&style=social">
+  </a>
+  &nbsp;
+  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0/stargazers">
+    <img src="https://img.shields.io/github/stars/akiraxyd-005/Voltaria-v2.0?style=social">
+  </a>
+</p>
 
-### 🎮 **Gambling & Games**
-- Coinflip (50/50 chance to double your bet)
-- Slot machine with multiple winning combinations
-- Blackjack card game
-- Dice rolling game
-- Tic Tac Toe vs AI
-- Rock Paper Scissors
-- Number guessing game
-- Trivia quiz
+<p align="center">
+  <a href="https://github.com/akiraxyd-005">
+    <img src="https://img.shields.io/badge/Owner-Arashi-white.svg?style=for-the-badge&logo=github" width="150px">
+  </a>
+  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/akiraxyd-005/Voltaria-v2.0?color=%231e81b0&style=for-the-badge" width="114px">
+  </a>
+  <a href="https://github.com/akiraxyd-005">
+    <img src="https://img.shields.io/badge/Open%20Source-YES-green.svg?style=for-the-badge" width="150px">
+  </a>
+  <a href="https://github.com/akiraxyd-005">
+    <img src="https://img.shields.io/badge/Maintained-YES-green.svg?style=for-the-badge" width="143px">
+  </a>
+</p>
 
-### ⭐ **Leveling System**
-- Earn XP for every message
-- Level up rewards
-- XP boosts from shop items
-- Custom level progression formula
-- Profile with detailed stats
-
-### 👥 **Group Moderation**
-- Welcome & Goodbye messages with custom images
-- Anti-link protection (blocks WhatsApp, Telegram, Discord, Instagram links)
-- Anti-spam system (auto-warns spammers)
-- Anti-raid protection
-- Warn & Kick system
-- Group mute/unmute
-- Group settings persistence
-
-### 🤖 **AI Integration**
-- OpenAI GPT-powered chat
-- Context-aware conversations
-- Multiple AI personalities
-- Configurable model selection
-
-### 🎨 **Media & Fun**
-- Sticker creator (images & videos)
-- Media downloader (YouTube, Instagram, TikTok, Twitter)
-- Anonymous confession system
-- Random inspirational quotes
-- Anime image generator (100+ categories)
-- Weather forecast
-- Calculator & Unit converter
-- Text translator (100+ languages)
-
-### 👑 **Owner Controls**
-- Economy management (add/remove money)
-- User data management
-- Broadcast messages to all groups
-- Bot statistics monitoring
-- Database backup & restore
-- Remote restart capability
+<p align="center">
+  <a href="https://whatsapp.com/channel/0029VbD6zwN4tRrvLtUTya0I">
+    <img src="https://img.shields.io/badge/Join%20Channel-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" width="180px">
+  </a>
+  <a href="https://chat.whatsapp.com/E5vC8SxmkKXJ0ufWRwIc3l">
+    <img src="https://img.shields.io/badge/Join%20Community-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" width="200px">
+  </a>
+</p>
 
 ---
 
-## 📋 Command List
+## 🎀 Key Features at a Glance
 
-### 💰 **Economy Commands**
-| Command | Aliases | Description |
-|---------|---------|-------------|
-| `!profile` | `!me`, `!stats` | View your detailed profile |
-| `!daily` | `!claim` | Claim daily reward |
-| `!weekly` | `!week` | Claim weekly reward |
-| `!work` | `!job` | Work to earn money |
-| `!crime` | `!heist` | Commit a crime |
-| `!rob @user` | `!mug` | Rob another user |
-| `!transfer @user <amount>` | `!pay`, `!send` | Send money to user |
-| `!bank` | - | Check bank balance |
-| `!deposit <amount>` | `!dep` | Deposit money to bank |
-| `!withdraw <amount>` | `!with` | Withdraw from bank |
-| `!shop` | `!store` | View shop items |
-| `!buy <item>` | `!purchase` | Buy items from shop |
-| `!inventory` | `!inv` | View your items |
-| `!leaderboard` | `!lb`, `!top` | View rankings |
-
-### 🎰 **Gambling Commands**
-| Command | Aliases | Description |
-|---------|---------|-------------|
-| `!coinflip <heads/tails> <amount>` | `!cf` | 50/50 chance game |
-| `!slots <amount>` | `!slot` | Slot machine |
-| `!dice <amount>` | `!roll` | Dice rolling game |
-| `!blackjack <amount>` | `!bj` | Play blackjack |
-
-### 🎮 **Game Commands**
-| Command | Aliases | Description |
-|---------|---------|-------------|
-| `!game ttt` | - | Tic Tac Toe vs AI |
-| `!game rps <choice>` | - | Rock Paper Scissors |
-| `!game number` | - | Guess the number |
-| `!game quiz` | - | Trivia quiz |
-| `!game memory` | - | Memory card game |
-
-### 🛡️ **Moderation Commands**
-| Command | Aliases | Description |
-|---------|---------|-------------|
-| `!group welcome on/off` | - | Toggle welcome messages |
-| `!group antilink on/off` | - | Block links in group |
-| `!group antispam on/off` | - | Enable spam protection |
-| `!group antiraid on/off` | - | Enable raid protection |
-| `!group mute on/off` | - | Mute entire group |
-| `!kick @user` | `!remove` | Kick member from group |
-| `!warn @user` | - | Warn a member |
-| `!warns @user` | - | Check member warnings |
-| `!resetwarns @user` | - | Reset member warnings |
-
-### 🤖 **AI & Fun Commands**
-| Command | Aliases | Description |
-|---------|---------|-------------|
-| `!ai <question>` | `!ask`, `!chat` | Chat with AI |
-| `!confess <message>` | `!anonymous` | Anonymous confession |
-| `!quote` | `!inspire` | Random inspirational quote |
-| `!meme` | `!memes` | Random meme |
-| `!anime <category>` | `!waifu` | Random anime image |
-
-### 🔧 **Utility Commands**
-| Command | Aliases | Description |
-|---------|---------|-------------|
-| `!sticker` | `!s` | Create sticker from image/video |
-| `!dl audio <url>` | - | Download audio |
-| `!dl video <url>` | - | Download video |
-| `!dl ig <url>` | - | Download Instagram |
-| `!dl tiktok <url>` | - | Download TikTok (no watermark) |
-| `!weather <city>` | `!temp` | Weather forecast |
-| `!calc <expression>` | `!math` | Calculator |
-| `!translate <lang> <text>` | `!tr` | Text translator |
-| `!ping` | `!latency` | Check bot response time |
-| `!info` | `!botinfo` | Bot information |
-| `!help` | `!commands`, `!menu` | Show all commands |
+| Feature                     | Details                                                                                                                             |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 💰 **Economy System**       | Complete virtual currency (Nex ◈), daily/weekly rewards, bank with interest, card tiers (Standard→Infinite)                         |
+| 🎰 **Gambling & Games**     | Coinflip, Slots, Blackjack, Dice, Tic Tac Toe, Wordle, Hangman, Trivia, Riddles                                                     |
+| 👥 **Group Moderation**     | Welcome/Goodbye messages, Anti-link, Anti-spam, Anti-raid, Warn/Kick system, Group mute/unmute, Tagall/Hidetag                     |
+| 🤖 **AI Integration**       | Gemini AI, GPT-powered chat, context-aware conversations                                                                           |
+| 📥 **Universal Downloader** | YouTube, TikTok, Instagram, Twitter, Facebook, Spotify, Snapchat, CapCut, Threads                                                   |
+| 🎭 **Anime Reactions**      | Hug, Kiss, Pat, Slap, Wink, Bonk, Poke, Yeet, Blush, Wave, Smile, Highfive, Handhold, Nom, Bite, Glomp, Cringe, Dance (all as GIFs) |
+| 🎨 **Audio Effects**        | Deep, Smooth, Fat, Tupai, Blown, Radio, Robot, Chipmunk, Nightcore, Earrape, Bass, Reverse, Slow, Fast, Baby, Deamon                |
+| 🛡️ **Full Moderation**      | Warn system (3 warns = kick), Anti-bad words, Anti-sticker, Anti-link whitelist                                                     |
+| 👑 **Owner Controls**       | Broadcast, Restart, Mode (public/private), Ban/Unban, Sudo users, Ghost mode, Auto typing, Auto recording                          |
+| 🔖 **Sticker Toolkit**      | Create stickers from images/videos, take stickers, sticker crop                                                                    |
+| 🔄 **Media Converters**     | Image→Sticker, Video→Audio, Sticker→Image                                                                                          |
+| 🔍 **Search Engine**        | Google, YouTube, Lyrics, Weather, GitHub, Wikipedia, News, Movies                                                                  |
+| 💳 **Banking System**       | Purchase cards (Standard, Gold, Platinum, Black, Infinite), deposit/withdraw, interest system, daily bonuses                       |
+| 🎮 **Party Games**          | Truth or Dare, Would You Rather, Never Have I Ever, Spin the Bottle, 8 Ball, Riddles                                               |
+| 📊 **Analytics**            | Track active members, ghost members, peak chat times, message breakdown                                                             |
+| ⚙️ **Custom Triggers**      | Set custom auto-reply triggers for your group                                                                                      |
+| 📨 **Anonymous Confessions**| Enable anonymous confession system (users DM the bot with group code)                                                              |
 
 ---
 
-## 🚀 Installation
+## 💳 NEX Banking Card System
 
-### Prerequisites
-- Node.js 20.0 or higher
-- MongoDB Atlas account (free tier works)
-- WhatsApp account
-- Git
+<p align="center">
+  <img src="assets/card.png" width="300">
+</p>
 
-### Step 1: Clone Repository
-```bash
-git clone https://github.com/yourusername/voltaria-nexus.git
-cd voltaria-nexus
+| Card Tier | Price (◈) | Interest Rate | Daily Bonus |
+|-----------|-----------|---------------|-------------|
+| 🥉 Standard | 5,000 | 2% | 200 |
+| 🥇 Gold | 25,000 | 4% | 500 |
+| 💎 Platinum | 100,000 | 6% | 1,000 |
+| 🖤 Black | 500,000 | 8% | 2,500 |
+| ♾ Infinite | 1,000,000 | 10% | 5,000 |
 
-voltaria-nexus/
-├── 📄 index.ts                 # Main entry point
-├── 📄 config.ts                # Configuration management
-├── 📄 package.json             # Dependencies
-├── 📄 tsconfig.json            # TypeScript config
-├── 📄 .env                     # Environment variables
-├── 📁 plugins/                 # Command modules (62+ files)
-│   ├── 📁 economy/             # Economy system commands
-│   │   ├── profile.ts
-│   │   ├── daily.ts
-│   │   ├── weekly.ts
-│   │   ├── work.ts
-│   │   ├── crime.ts
-│   │   ├── rob.ts
-│   │   ├── transfer.ts
-│   │   ├── bank.ts
-│   │   ├── shop.ts
-│   │   ├── buy.ts
-│   │   ├── inventory.ts
-│   │   └── leaderboard.ts
-│   ├── 📄 ai.ts                # AI chat commands
-│   ├── 📄 confess.ts           # Anonymous confession
-│   ├── 📄 games.ts             # Interactive games
-│   ├── 📄 group.ts             # Group moderation
-│   ├── 📄 downloader.ts        # Media downloaders
-│   ├── 📄 sticker.ts           # Sticker creator
-│   ├── 📄 anime.ts             # Anime images
-│   ├── 📄 weather.ts           # Weather forecast
-│   ├── 📄 calculator.ts        # Calculator
-│   ├── 📄 translate.ts         # Translator
-│   ├── 📄 quote.ts             # Inspirational quotes
-│   ├── 📄 meme.ts              # Random memes
-│   ├── 📄 info.ts              # Bot information
-│   ├── 📄 help.ts              # Help menu
-│   ├── 📄 ping.ts              # Latency check
-│   └── 📄 owner.ts             # Owner commands
-├── 📁 lib/                     # Core libraries
-│   ├── 📄 database.ts          # MongoDB models
-│   ├── 📄 economy.ts           # Economy engine
-│   ├── 📄 groupMeta.ts         # Group metadata
-│   ├── 📄 antiRaid.ts          # Anti-raid protection
-│   ├── 📄 antiSpam.ts          # Anti-spam system
-│   ├── 📄 antiLink.ts          # Anti-link protection
-│   ├── 📄 welcomeHandler.ts    # Welcome/goodbye cards
-│   ├── 📄 cooldown.ts          # Command cooldowns
-│   ├── 📄 logger.ts            # Logging system
-│   ├── 📄 utils.ts             # Utility functions
-│   └── 📄 types.ts             # TypeScript interfaces
-├── 📁 data/                    # Data utilities
-├── 📁 store/                   # Runtime data storage
-├── 📁 session/                 # WhatsApp auth credentials
-└── 📁 tmp/                     # Temporary media files
+---
 
-Step 2: Install Dependencies
+## 📋 Command Categories
+
+| Category | Commands | Description |
+|----------|----------|-------------|
+| 💰 **Economy** | 100+ | Currency, gambling, banking, shop, inventory, leaderboard |
+| 🎮 **Games** | 17 | Word Chain, Trivia, Tic Tac Toe, Hangman, Wordle, Who Am I |
+| 👥 **Group** | 62 | Welcome, antilink, warn, kick, promote, demote, tagall, poll |
+| 🤖 **AI** | 18 | GPT, Gemini, Image generation, Text-to-speech |
+| 📥 **Download** | 19 | YouTube, TikTok, Instagram, Twitter, Spotify |
+| 🎭 **Reactions** | 18 | Hug, kiss, pat, slap, etc. (GIFs) |
+| 🎵 **Audio** | 16 | Voice effects (deep, robot, nightcore, etc.) |
+| 👑 **Owner** | 27 | Broadcast, restart, ban, sudo, mode, update |
+| ⚙️ **Settings** | 5 | Privacy, profile pic, bio, name |
+| 🔧 **Tools** | 24 | AFK, sticker, QR, weather, calculator, translate |
+
+---
+
+## 🚀 Deployment
+
+### Deploy on Railway (Recommended)
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/your-template-link)
+
+### Deploy on Render
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+### Local Installation
+
+**Requirements:** [Node.js](https://nodejs.org/en/download/) (v18+), [Git](https://github.com/git-guides/install-git)
 
 ```bash
+# 1. Clone repository
+git clone https://github.com/akiraxyd-005/Voltaria-v2.0
+cd Voltaria-v2.0
+
+# 2. Install dependencies
 npm install
-```
 
-Step 3: Configure Environment
+# 3. Create config file
+cp config.example.js config.js
+# → Edit config.js with your values
 
-Create a .env file in the root directory:
-
-```env
-# Required
-MONGODB_URI=mongodb+srv://username:password@cluster.xxxxx.mongodb.net/voltaria
-OWNER_NUMBER=xxxxxxxxxxx
-OWNER_NAME=⚜️𝓐𝓻𝓪𝓼𝓱𝓲⚜️
-
-# Optional (for AI features)
-OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-# Optional (for weather)
-WEATHER_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-# Optional (for media download)
-YOUTUBE_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-Step 4: Build & Run
-
-```bash
-# Development mode
-npm run dev
-
-# Production build
-npm run build
+# 4. Start the bot
 npm start
-
-# Using PM2 (recommended for production)
-npm run pm2:start
-npm run pm2:logs
 ```
 
-Step 5: Connect WhatsApp
+Scan the QR code that appears in your terminal via WhatsApp → Linked Devices → Link a Device.
 
-1. Run the bot
-2. QR code will appear in terminal
-3. Open WhatsApp on your phone
-4. Go to Settings → Linked Devices → Link a Device
-5. Scan the QR code
-6. Wait for "Bot Connected Successfully" message
+---
 
+⚙️ Configuration
+
+Create a config.js file:
+
+```javascript
+module.exports = {
+    ownerNumber: ['254108720384'],
+    ownerName: ['Arashi'],
+    botName: 'Voltaria',
+    prefix: '§',
+    currencyName: 'Nex',
+    currencySymbol: '◈'
+};
+```
+
+Environment Variables (for hosting)
+
+Variable Description Required
+OWNER_NUMBER Your WhatsApp number ✅
+BOT_NAME Bot display name ✅
+PREFIX Command prefix (default: §) ✅
+SESSION_ID Session ID for auto-login Optional
+
+---
+
+📦 Dependencies
+
+Package Purpose
+@whiskeysockets/baileys WhatsApp Multi-Device engine
+express Web server for health checks
+qrcode-terminal QR code display
+fluent-ffmpeg Audio effects processing
+
+---
+
+💡 Commands Overview
+
+Command Description
+§ping Check bot response time
+§afk <reason> Set AFK status
+§bankbal Check bank balance
+§buycard <tier> Purchase banking card
+§deposit <amount> Deposit money to bank
+§withdraw <amount> Withdraw money from bank
+§daily Claim daily reward
+§work Work to earn money
+§crime Commit a crime
+§rob @user Rob another user
+§coinflip <heads/tails> <amount> 50/50 gambling
+§slots <amount> Slot machine
+§blackjack <amount> Play blackjack
+§profile View your profile
+§leaderboard View wealth rankings
+§tagall Tag all members
+§warn @user Warn a user
+§kick @user Kick a user
+§promote @user Promote to admin
+§poll Question \| A \| B Create a poll
+§sticker Create sticker from replied image
+§ytmp3 <url> Download YouTube audio
+§tiktok <url> Download TikTok video
+§weather <city> Get weather forecast
+§ai <question> Chat with AI
+§truth Random truth question
+§dare Random dare challenge
+§hug @user Send hug GIF
+
+---
+
+👤 Author
+
+Arashi - GitHub
+
+---
+
+🙏 Credits
+
+· Built with Baileys
+· Inspired by Atlas MD
+
+---
+
+📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+<p align="center">
+  <b>©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$</b>
+</p>
+```
+
+---
