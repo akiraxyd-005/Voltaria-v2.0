@@ -149,18 +149,10 @@ Lost your session? Delete the session folder and restart.
 
 ---
 
-🙏 Acknowledgments
+ 👥 Credits
 
 · Inspired by: Atlas MD by FantoX & Team Atlas
 · Built with: Baileys
-
----
-
-👥 Credits
-
-Role Name GitHub
-Developer Arashi @Arashi005
-Contributor akiraxyd @akiraxyd-005
 
 ---
 
