@@ -71,18 +71,6 @@
 
 ---
 
-## 💳 NEX Banking Card System
-
-| Card Tier | Price (◈) | Interest Rate | Daily Bonus |
-|-----------|-----------|---------------|-------------|
-| 🥉 Standard | 5,000 | 2% | 200 |
-| 🥇 Gold | 25,000 | 4% | 500 |
-| 💎 Platinum | 100,000 | 6% | 1,000 |
-| 🖤 Black | 500,000 | 8% | 2,500 |
-| ♾ Infinite | 1,000,000 | 10% | 5,000 |
-
----
-
 ## 🚀 One-Click Deploy
 
 <p align="center">
