@@ -175,4 +175,3 @@ MIT License
 <p align="center">
   <b>©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$</b>
 </p>
-```
