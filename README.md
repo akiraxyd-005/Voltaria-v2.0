@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/voltaria-banner.png" width="100%">
+  <img src="main/assets/voltaria-banner.png" width="100%">
 </p>
 
 <h1 align="center">⚡ VOLTARIA NEXUS ⚡</h1>
@@ -9,12 +9,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Arashi005/Voltaria-v2.0/fork">
-    <img src="https://img.shields.io/github/forks/Arashi005/Voltaria-v2.0?label=Fork&style=social">
+  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0/fork">
+    <img src="https://img.shields.io/github/forks/akiraxyd-005/Voltaria-v2.0?label=Fork&style=social">
   </a>
   &nbsp;
-  <a href="https://github.com/Arashi005/Voltaria-v2.0/stargazers">
-    <img src="https://img.shields.io/github/stars/Arashi005/Voltaria-v2.0?style=social">
+  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0/stargazers">
+    <img src="https://img.shields.io/github/stars/akiraxyd-005/Voltaria-v2.0?style=social">
   </a>
 </p>
 
@@ -22,8 +22,8 @@
   <a href="https://github.com/Arashi005">
     <img src="https://img.shields.io/badge/Owner-Arashi-white.svg?style=for-the-badge&logo=github">
   </a>
-  <a href="https://github.com/Arashi005/Voltaria-v2.0/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/Arashi005/Voltaria-v2.0?color=%231e81b0&style=for-the-badge">
+  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/akiraxyd-005/Voltaria-v2.0?color=%231e81b0&style=for-the-badge">
   </a>
 </p>
 
@@ -68,7 +68,7 @@
 ### Local Installation
 
 ```bash
-git clone https://github.com/Arashi005/Voltaria-v2.0
+git clone https://github.com/akiraxyd-005/Voltaria-v2.0
 cd Voltaria-v2.0
 npm install
 npm start
@@ -98,5 +98,3 @@ MIT License
   <b>©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$</b>
 </p>
 ```
-
----
