@@ -7,7 +7,7 @@
 <h1 align="center">⚡ VOLTARIA NEXUS ⚡</h1>
 
 <p align="center">
-  <i>An Opensource WhatsApp bot by <a href="https://github.com/Arashi005">Arashi</a> — built with Baileys Multi-Device for maximum features, stability and compatibility.</i>
+  <i>Inspired by <a href="https://github.com/FantoX/Atlas-MD">Atlas MD</a> — Built with Baileys Multi-Device</i>
 </p>
 
 <p align="center">
@@ -149,6 +149,13 @@ Lost your session? Delete the session folder and restart.
 
 ---
 
+🙏 Acknowledgments
+
+· Inspired by: Atlas MD by FantoX & Team Atlas
+· Built with: Baileys
+
+---
+
 👥 Credits
 
 Role Name GitHub
@@ -174,4 +181,3 @@ MIT License
 <p align="center">
   <b>©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$</b>
 </p>
-```
