@@ -1,3 +1,4 @@
+
 <p align="center">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
     <img src="main/assets/voltaria-banner.png" width="100%">
@@ -27,9 +28,7 @@
   <a href="https://github.com/akiraxyd-005">
     <img src="https://img.shields.io/badge/Contributor-akiraxyd-white.svg?style=for-the-badge&logo=github" width="180px">
   </a>
-  <a href="https://github.com/akiraxyd-005/Voltaria-v2.0/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/akiraxyd-005/Voltaria-v2.0?color=%231e81b0&style=for-the-badge" width="114px">
-  </a>
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" width="100px">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
     <img src="https://img.shields.io/badge/Open%20Source-YES-green.svg?style=for-the-badge" width="150px">
   </a>
@@ -154,8 +153,6 @@ Lost your session? Delete the session folder and restart.
 · Inspired by: Atlas MD by FantoX & Team Atlas
 · Built with: Baileys
 
----
-
 Role Name GitHub
 Developer Arashi @Arashi005
 Contributor akiraxyd @akiraxyd-005
@@ -180,3 +177,5 @@ MIT License
   <b>©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$</b>
 </p>
 ```
+
+---
