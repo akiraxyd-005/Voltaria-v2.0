@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
-    <img src="main/assets/file_00000000bbd871f69f4610a31a8e2c49.png" width="100%">
+    <img src="assets/file_00000000bbd871f69f4610a31a8e2c49.png" width="100%">
   </a>
 </p>
 
@@ -147,14 +147,14 @@ Lost your session? Delete the session folder and restart.
 
 ---
 
-## 👥 Credits
+👥 Credits
 
-- **Inspired by:** [Atlas MD](https://github.com/FantoX/Atlas-MD) by [FantoX](https://github.com/FantoX) & Team Atlas
-- **Built with:** [Baileys](https://github.com/WhiskeySockets/Baileys)
+· Inspired by: Atlas MD by FantoX & Team Atlas
+· Built with: Baileys
 
-**Developer:** [Arashi](https://github.com/Arashi005) `@Arashi005`
+Developer: Arashi (@Arashi005)
 
-**Contributor:** [akiraxyd](https://github.com/akiraxyd-005) `@akiraxyd-005`
+Contributor: akiraxyd (@akiraxyd-005)
 
 ---
 
