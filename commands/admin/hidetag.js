@@ -1,14 +1,19 @@
 module.exports = {
     name: 'hidetag',
-    aliases: ['htag', 'silenttag'],
+    aliases: ['htag', 'silenttag', 'ghosttag'],
     category: 'group',
     description: 'Tag all members without visible @ mention',
+    usage: '§hidetag <message>',
     isGroup: true,
     isAdmin: true,
     async execute(sock, msg, args, extra) {
         const metadata = await sock.groupMetadata(extra.from);
         const participants = metadata.participants;
-        const message = args.join(' ') || '📢 Announcement from admins';
+        const message = args.join(' ');
+        
+        if (!message) {
+            return extra.reply(`❌ *Usage:* §hidetag <message>\n\nExample: §hidetag Meeting in 10 minutes!\n\n> ©POWERED BY NEXUS`);
+        }
         
         const mentions = participants.map(p => p.id);
         
