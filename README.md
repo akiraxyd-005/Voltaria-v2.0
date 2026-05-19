@@ -1,4 +1,3 @@
-```markdown
 <p align="center">
   <img src="assets/voltaria-banner.png" width="100%">
 </p>
