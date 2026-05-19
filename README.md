@@ -1,5 +1,3 @@
-
-```markdown
 <p align="center">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
     <img src="main/assets/voltaria-banner.png" width="100%">
