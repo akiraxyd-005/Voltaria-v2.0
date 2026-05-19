@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
-    <img src="assets/file_00000000bbd871f69f4610a31a8e2c49.png" width="100%">
+    <img src="assets/file_00000000bfdc71f88e1bfdf0668ecb63.png" width="100%">
   </a>
 </p>
 
