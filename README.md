@@ -1,4 +1,3 @@
-
 <p align="center">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
     <img src="main/assets/voltaria-banner.png" width="100%">
@@ -33,7 +32,7 @@
     <img src="https://img.shields.io/badge/Open%20Source-YES-green.svg?style=for-the-badge" width="150px">
   </a>
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
-    <img src="https://img.shields.io/badge/Maintained-YES-green.svg?style=for-the-badge" width="143px">
+    <img src="https://img.shields.io/badge/Maintained-YES-green.svg?style-for-the-badge" width="143px">
   </a>
 </p>
 
@@ -179,3 +178,4 @@ MIT License
 ```
 
 ---
+
