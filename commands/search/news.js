@@ -18,32 +18,58 @@ module.exports = {
         await extra.reply(`📰 *Fetching top ${category} news...*`);
         
         try {
-            const response = await axios.get('https://gnews.io/api/v4/top-headlines', {
-                params: {
-                    category: category,
-                    lang: 'en',
-                    country: 'us',
-                    max: 5,
-                    apikey: process.env.GNEWS_API_KEY
-                }
-            });
+            let rssUrl = '';
             
-            const articles = response.data.articles;
+            switch(category) {
+                case 'world':
+                    rssUrl = 'https://feeds.bbci.co.uk/news/world/rss.xml';
+                    break;
+                case 'business':
+                    rssUrl = 'https://feeds.bbci.co.uk/news/business/rss.xml';
+                    break;
+                case 'technology':
+                    rssUrl = 'https://feeds.bbci.co.uk/news/technology/rss.xml';
+                    break;
+                case 'entertainment':
+                    rssUrl = 'https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml';
+                    break;
+                case 'sports':
+                    rssUrl = 'https://feeds.bbci.co.uk/sport/rss.xml';
+                    break;
+                case 'science':
+                    rssUrl = 'https://feeds.nationalgeographic.com/ng/News/News-Main';
+                    break;
+                case 'health':
+                    rssUrl = 'https://www.who.int/rss-feeds/news-english.xml';
+                    break;
+                default:
+                    rssUrl = 'https://feeds.bbci.co.uk/news/rss.xml';
+            }
             
-            if (!articles || articles.length === 0) {
+            const response = await axios.get(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`);
+            const items = response.data.items.slice(0, 5);
+            
+            if (!items || items.length === 0) {
                 return extra.reply(`❌ No news found for ${category}.`);
             }
             
             let result = `📰 *Top ${category.toUpperCase()} News*\n\n`;
-            for (let i = 0; i < articles.length; i++) {
-                const article = articles[i];
-                result += `${i+1}. *${article.title}*\n   📝 ${article.description?.substring(0, 100) || 'No description'}...\n   🔗 ${article.url}\n\n`;
+            
+            for (let i = 0; i < items.length; i++) {
+                const article = items[i];
+                const title = article.title.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+                const description = article.description?.replace(/<[^>]*>/g, '').substring(0, 100) || 'No description';
+                
+                result += `${i+1}. *${title}*\n`;
+                result += `   📝 ${description}...\n`;
+                result += `   🔗 ${article.link}\n\n`;
             }
             
-            result += `> ©POWERED BY NEXUS`;
+            result += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n> ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$`;
             await extra.reply(result);
+            
         } catch (error) {
-            await extra.reply(`❌ News fetch failed. Please try again later.\n\n> ©POWERED BY NEXUS`);
+            await extra.reply(`❌ News fetch failed. Please try again later.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n> ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$`);
         }
     }
 };
