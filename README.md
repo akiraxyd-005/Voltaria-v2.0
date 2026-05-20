@@ -36,15 +36,6 @@
   </a>
 </p>
 
-<p align="center">
-  <a href="https://whatsapp.com/channel/0029VbD6zwN4tRrvLtUTya0I">
-    <img src="https://img.shields.io/badge/Join%20Channel-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" width="200px">
-  </a>
-  <a href="https://chat.whatsapp.com/E5vC8SxmkKXJ0ufWRwIc3l">
-    <img src="https://img.shields.io/badge/Join%20Community-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" width="200px">
-  </a>
-</p>
-
 ---
 
 ## ⚠️ Warning
@@ -73,9 +64,10 @@
 
 ## 🆘 Support
 
-- **WhatsApp Group:** [Join Community](https://chat.whatsapp.com/E5vC8SxmkKXJ0ufWRwIc3l)
-- **Channel:** [Voltaria Updates](https://whatsapp.com/channel/0029VbD6zwN4tRrvLtUTya0I)
-- **Note:** Support is provided ONLY for deployment/setup issues, not custom development.
+For **bot issues, deployment help, or setup questions**:
+
+- **Direct WhatsApp:** [Contact Arashi](https://wa.me/254108720384)
+- **Note:** Support is provided ONLY for deployment/setup issues, not custom development or feature requests.
 
 ---
 
@@ -99,7 +91,7 @@
 | OWNER_NUMBER | Your WhatsApp number (with country code) | ✅ |
 | BOT_NAME | Bot display name | ✅ |
 | PREFIX | Command prefix (default: §) | ✅ |
-| SESSION_ID | Session ID for auto-login (get from [session generator](https://session-generator-url.com)) | Optional |
+| SESSION_ID | Session ID for auto-login | Optional |
 
 ---
 
