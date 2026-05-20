@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "echo 'No build step required'",
     "clean": "rm -rf session",
     "pm2:start": "pm2 start index.js --name voltaria-nexus",
     "pm2:stop": "pm2 stop voltaria-nexus",
@@ -45,13 +44,10 @@
     "yt-search": "^2.10.3",
     "youtube-dl-exec": "^2.0.0",
     "node-fetch": "^2.7.0",
-    "hmtai": "^2.0.0"
+    "hmtai": "^2.0.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.0",
-    "typescript": "^5.0.0",
-    "tsx": "^4.0.0",
-    "@types/node": "^20.0.0",
-    "@types/uuid": "^9.0.7"
+    "nodemon": "^3.0.0"
   }
 }
