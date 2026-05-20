@@ -84,21 +84,6 @@
 
 ---
 
-## ⚙️ Configuration
-
-Create a `config.js` file:
-
-```javascript
-module.exports = {
-    ownerNumber: ['254108720384'],
-    ownerName: ['Arashi'],
-    botName: 'Voltaria',
-    prefix: '§',
-    currencyName: 'Nex',
-    currencySymbol: '◈'
-};
-```
-
 Environment Variables
 
 Variable Description Required
