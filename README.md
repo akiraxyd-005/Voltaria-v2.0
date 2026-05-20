@@ -71,32 +71,41 @@
 
 ---
 
+## 🆘 Support
+
+- **WhatsApp Group:** [Join Community](https://chat.whatsapp.com/E5vC8SxmkKXJ0ufWRwIc3l)
+- **Channel:** [Voltaria Updates](https://whatsapp.com/channel/0029VbD6zwN4tRrvLtUTya0I)
+- **Note:** Support is provided ONLY for deployment/setup issues, not custom development.
+
+---
+
 ## 🚀 One-Click Deploy
 
 <p align="center">
 
 | Platform    | Deploy |
 | ----------- | ------ |
-| **Railway** | <a href="https://railway.app/template/your-template-link"><img src="https://railway.app/button.svg" alt="Deploy on Railway" height="32"></a> |
+| **Railway** | <a href="https://railway.app/template/YOUR_TEMPLATE_ID_HERE"><img src="https://railway.app/button.svg" alt="Deploy on Railway" height="32"></a> |
 | **Render**  | <a href="https://render.com/deploy"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy on Render" height="32"></a> |
 
 </p>
 
 ---
 
-Environment Variables
+## 🔧 Environment Variables
 
-Variable Description Required
-OWNER_NUMBER Your WhatsApp number ✅
-BOT_NAME Bot display name ✅
-PREFIX Command prefix (default: §) ✅
-SESSION_ID Session ID for auto-login Optional
+| Variable | Description | Required |
+|----------|-------------|----------|
+| OWNER_NUMBER | Your WhatsApp number (with country code) | ✅ |
+| BOT_NAME | Bot display name | ✅ |
+| PREFIX | Command prefix (default: §) | ✅ |
+| SESSION_ID | Session ID for auto-login (get from [session generator](https://session-generator-url.com)) | Optional |
 
 ---
 
-📦 Local Installation
+## 📦 Local Installation
 
-Requirements: Node.js · Git
+**Requirements:** Node.js · Git
 
 ```bash
 # 1. Clone and enter the directory
@@ -125,9 +134,9 @@ Lost your session? Delete the session folder and restart.
 · Inspired by: <a href="https://github.com/FantoX/Atlas-MD">Atlas MD</a> by <a href="https://github.com/FantoX">FantoX</a> & Team Atlas
 · Built with: <a href="https://github.com/WhiskeySockets/Baileys">Baileys</a>
 
-Developer: <a href="https://github.com/Arashi005">Arashi</a> (<code>@Arashi005</code>)
+Developer: <a href="https://github.com/Arashi005">Arashi</a> (@Arashi005)
 
-Contributor: <a href="https://github.com/akiraxyd-005">akiraxyd</a> (<code>@akiraxyd-005</code>)
+Contributor: <a href="https://github.com/akiraxyd-005">akiraxyd</a> (@akiraxyd-005)
 
 ---
 
@@ -145,6 +154,10 @@ MIT License
 
 ---
 
+⭐ Don't forget to star this repository ⭐
+
+---
+
 <p align="center">
-  <b>©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$</b>
+  <b>© POWERED BY N£XUS</b>
 </p>
