@@ -123,22 +123,23 @@ async function startBot() {
     sock.ev.on('messages.upsert', async ({ messages, type }) => {
         if (type !== 'notify') return;
         for (const msg of messages) {
-            if (!msg.message || msg.key.fromMe) continue;
-            
-            // Ignore status messages
-            if (msg.key.remoteJid === 'status@broadcast') continue;
-            
+            const jid = msg.key?.remoteJid || '';
+            if (!msg.message) continue;
+            if (jid === 'status@broadcast') continue;
+
+            const body = msg.message?.conversation || msg.message?.extendedTextMessage?.text || '';
+            const isFromMe = msg.key.fromMe;
+
+            // Log every incoming message for debugging
+            console.log(`📨 MSG | fromMe=${isFromMe} | jid=${jid.split('@')[0]} | body=${body.slice(0, 80)}`);
+
+            // Allow owner self-commands (fromMe) only if they start with the prefix
+            if (isFromMe && !body.startsWith(prefix)) continue;
+
             try {
-                // Try new handler system first
                 await messageHandler(sock, msg, commandHandler, prefix, botName);
             } catch (err) {
-                console.error('New handler error:', err.message);
-                // Fallback to old handler
-                try {
-                    await handler.handleMessage(sock, msg);
-                } catch (err2) {
-                    console.error('Old handler error:', err2.message);
-                }
+                console.error('Handler error:', err.message);
             }
         }
     });

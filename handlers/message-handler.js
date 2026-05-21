@@ -29,6 +29,12 @@ module.exports = async (sock, msg, commandHandler, prefix, botName) => {
 
         // Extra functions for commands
         const extra = {
+            sender: formattedMsg.sender,
+            chat: formattedMsg.chat,
+            isGroup: formattedMsg.isGroup,
+            isAdmin: formattedMsg.isAdmin,
+            isOwner: formattedMsg.isOwner,
+            pushName: formattedMsg.pushName,
             reply: async (text, options = {}) => {
                 await sock.sendMessage(formattedMsg.chat, { text, ...options });
             },
