@@ -1,6 +1,82 @@
 const path = require('path');
 const fs = require('fs');
 
+const CATEGORY_EMOJI = {
+    admin:     '🛡️',
+    ai:        '🤖',
+    anime:     '🎌',
+    audio:     '🎵',
+    debug:     '🔍',
+    download:  '📥',
+    economy:   '💰',
+    fun:       '🎉',
+    games:     '🎮',
+    group:     '👥',
+    hentai:    '🔞',
+    info:      'ℹ️',
+    owner:     '👑',
+    reactions: '💕',
+    religion:  '📖',
+    search:    '🔎',
+    session:   '🔐',
+    settings:  '⚙️',
+    text:      '📝',
+    textmaker: '✨',
+    tools:     '🔧',
+    whatsapp:  '📱',
+};
+
+const SKIP_CATEGORIES = new Set(['menu', 'general']);
+
+function buildMenu(pushName, days, hours, minutes) {
+    const commandsDir = path.join(__dirname, '../../commands');
+    const categories = fs.readdirSync(commandsDir)
+        .filter(c => {
+            if (SKIP_CATEGORIES.has(c)) return false;
+            return fs.statSync(path.join(commandsDir, c)).isDirectory();
+        })
+        .sort();
+
+    let sections = '';
+    let categoryList = [];
+
+    for (const cat of categories) {
+        const emoji = CATEGORY_EMOJI[cat] || '📌';
+        const catDir = path.join(commandsDir, cat);
+        const cmds = fs.readdirSync(catDir)
+            .filter(f => f.endsWith('.js'))
+            .map(f => '§' + f.replace('.js', ''))
+            .sort();
+
+        if (cmds.length === 0) continue;
+
+        sections += `┌───⊷ ${emoji} *${cat}*\n`;
+        for (const cmd of cmds) {
+            sections += `│ ⌘ ${cmd}\n`;
+        }
+        sections += `└──────────────⊷\n\n`;
+        categoryList.push(`${emoji} ${cat}`);
+    }
+
+    return `╔════════════════════════╗
+║     *⎋Voltaria DASHBOARD⎋*
+╚════════════════════════╝
+ » 👤 *USER:* ${pushName || 'Guest'}
+ » 🚀 *UPTIME:* ${days}d ${hours}h ${minutes}m
+ » 🏷️ *PREFIX:* §
+ » 📦 *VERSION:* 3.4.0
+══════════════════════════
+
+${sections}━━━━━━━━━━━━━━━━━━━━━━━━━━
+📂 *View a category:*
+  §menu <category>
+
+  ${categoryList.join('  •  ')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+> ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠᴏʟᴛᴀʀɪᴀ ɴᴇxᴜꜱ`;
+}
+
 module.exports = {
     name: 'menu',
     aliases: ['help', 'all', 'commands'],
@@ -13,253 +89,40 @@ module.exports = {
         const hours = Math.floor((uptime % 86400) / 3600);
         const minutes = Math.floor((uptime % 3600) / 60);
 
-        const menu = `╔════════════════════════╗
-║     *⎋Voltaria DASHBOARD⎋*
-╚════════════════════════╝
- » 👤 *USER:* ${msg.pushName || 'Guest'}
- » 🚀 *UPTIME:* ${days}d ${hours}h ${minutes}m
- » 🏷️ *PREFIX:* §
- » 📦 *VERSION:* 3.4.0
-══════════════════════════
-
-┌───⊷ 🤖 *ai*
-│ ⌘ §gpt
-│ ⌘ §gemini
-│ ⌘ §vision
-│ ⌘ §summarize
-│ ⌘ §recipe
-│ ⌘ §tts
-│ ⌘ §removebg
-│ ⌘ §enhance
-│ ⌘ §upscale
-│ ⌘ §agentmode
-└──────────────⊷
-
-┌───⊷ 🎌 *anime*
-│ ⌘ §anime
-│ ⌘ §animequote
-│ ⌘ §waifu
-│ ⌘ §neko
-│ ⌘ §foxxgirl
-│ ⌘ §character
-└──────────────⊷
-
-┌───⊷ 🎵 *audio*
-│ ⌘ §deep
-│ ⌘ §nightcore
-│ ⌘ §robot
-│ ⌘ §bass
-│ ⌘ §chipmunk
-│ ⌘ §earrape
-│ ⌘ §slow
-│ ⌘ §fast
-│ ⌘ §reverse
-└──────────────⊷
-
-┌───⊷ 📥 *download*
-│ ⌘ §play
-│ ⌘ §yt
-│ ⌘ §ytvideo
-│ ⌘ §yts
-│ ⌘ §tiktok
-│ ⌘ §instagram
-│ ⌘ §twitter
-│ ⌘ §facebook
-│ ⌘ §capcut
-└──────────────⊷
-
-┌───⊷ 💰 *economy*
-│ ⌘ §balance
-│ ⌘ §work
-│ ⌘ §daily
-│ ⌘ §rob
-│ ⌘ §pay
-│ ⌘ §slots
-│ ⌘ §blackjack
-│ ⌘ §coinflip
-│ ⌘ §dice
-│ ⌘ §profile
-└──────────────⊷
-
-┌───⊷ 🎮 *games*
-│ ⌘ §ttt
-│ ⌘ §hangman
-│ ⌘ §trivia
-│ ⌘ §wordle
-│ ⌘ §riddle
-│ ⌘ §whoami
-│ ⌘ §wyr
-└──────────────⊷
-
-┌───⊷ 👥 *group*
-│ ⌘ §tagall
-│ ⌘ §poll
-│ ⌘ §warn
-│ ⌘ §kick
-│ ⌘ §promote
-│ ⌘ §demote
-│ ⌘ §mute
-│ ⌘ §antilink
-│ ⌘ §welcome
-│ ⌘ §goodbye
-└──────────────⊷
-
-┌───⊷ 🔞 *hentai*
-│ ⌘ §waifu
-│ ⌘ §hentai
-│ ⌘ §hentaigif
-│ ⌘ §trap
-│ ⌘ §cum
-│ ⌘ §panties
-└──────────────⊷
-
-┌───⊷ ℹ️ *info*
-│ ⌘ §botinfo
-│ ⌘ §groupinfo
-│ ⌘ §whois
-│ ⌘ §getpp
-│ ⌘ §cinfo
-│ ⌘ §repo
-└──────────────⊷
-
-┌───⊷ 🖼️ *media*
-│ ⌘ §toimg
-│ ⌘ §tomp3
-│ ⌘ §toaudio
-│ ⌘ §toptt
-│ ⌘ §tovideo
-│ ⌘ §togif
-└──────────────⊷
-
-┌───⊷ 🎯 *misc*
-│ ⌘ §ping
-│ ⌘ §uptime
-│ ⌘ §alive
-│ ⌘ §owner
-│ ⌘ §echo
-│ ⌘ §report
-└──────────────⊷
-
-┌───⊷ 👑 *owner*
-│ ⌘ §on
-│ ⌘ §off
-│ ⌘ §nsfw
-│ ⌘ §broadcast
-│ ⌘ §restart
-│ ⌘ §ban
-│ ⌘ §unban
-└──────────────⊷
-
-┌───⊷ 💕 *reactions*
-│ ⌘ §hug
-│ ⌘ §kiss
-│ ⌘ §slap
-│ ⌘ §pat
-│ ⌘ §cuddle
-│ ⌘ §dance
-└──────────────⊷
-
-┌───⊷ 📖 *religion*
-│ ⌘ §bible
-│ ⌘ §quran
-└──────────────⊷
-
-┌───⊷ 🔍 *search*
-│ ⌘ §google
-│ ⌘ §image
-│ ⌘ §weather
-│ ⌘ §news
-│ ⌘ §wiki
-└──────────────⊷
-
-┌───⊷ 🔐 *session*
-│ ⌘ §pair
-│ ⌘ §addsession
-│ ⌘ §listsessions
-│ ⌘ §delsession
-└──────────────⊷
-
-┌───⊷ ⚙️ *settings*
-│ ⌘ §setbio
-│ ⌘ §setname
-│ ⌘ §setpp
-│ ⌘ §getprivacy
-│ ⌘ §setprivacy
-└──────────────⊷
-
-┌───⊷ 📝 *text*
-│ ⌘ §say
-│ ⌘ §fancy
-│ ⌘ §fancylist
-└──────────────⊷
-
-┌───⊷ ✨ *textmaker*
-│ ⌘ §1917
-│ ⌘ §neon
-│ ⌘ §glitch
-│ ⌘ §fire
-│ ⌘ §matrix
-│ ⌘ §hacker
-└──────────────⊷
-
-┌───⊷ 🔧 *tools*
-│ ⌘ §sticker
-│ ⌘ §qr
-│ ⌘ §readqr
-│ ⌘ §schedule
-│ ⌘ §trt
-│ ⌘ §ss
-│ ⌘ §afk
-│ ⌘ §calc
-└──────────────⊷
-
-┌───⊷ 🛠️ *utility*
-│ ⌘ §fakeid
-│ ⌘ §tempmail
-│ ⌘ §remind
-│ ⌘ §tourl
-└──────────────⊷
-
-┌───⊷ 📱 *whatsapp*
-│ ⌘ §unsend
-│ ⌘ §forward
-│ ⌘ §block
-│ ⌘ §unblock
-│ ⌘ §clear
-│ ⌘ §pinchat
-│ ⌘ §archive
-│ ⌘ §del
-└──────────────⊷
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-📂 *View a category:*
-  §menu <category>
-
-  🤖 ai  •  🎌 anime  •  🎵 audio  •  📥 download  •  💰 economy
-  🎮 games  •  👥 group  •  🔞 hentai  •  ℹ️ info  •  🖼️ media
-  🎯 misc  •  👑 owner  •  💕 reactions  •  📖 religion  •  🔍 search
-  🔐 session  •  ⚙️ settings  •  📝 text  •  ✨ textmaker  •  🔧 tools
-  🛠️ utility  •  📱 whatsapp
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-> ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠᴏʟᴛᴀʀɪᴀ ɴᴇxᴜꜱ`;
-
+        const menu = buildMenu(msg.pushName, days, hours, minutes);
         const menuImagePath = path.join(__dirname, '../../assets/menu.png');
 
-        try {
-            if (fs.existsSync(menuImagePath)) {
-                const imageBuffer = fs.readFileSync(menuImagePath);
-                await sock.sendMessage(msg.chat, {
-                    image: imageBuffer,
-                    caption: menu,
-                    mimetype: 'image/png'
-                });
-            } else {
-                await extra.reply(menu);
+        if (fs.existsSync(menuImagePath)) {
+            try {
+                let imageBuffer = fs.readFileSync(menuImagePath);
+
+                // Compress if sharp is available (reduces size for WhatsApp)
+                try {
+                    const sharp = require('sharp');
+                    imageBuffer = await sharp(imageBuffer)
+                        .resize({ width: 800, withoutEnlargement: true })
+                        .jpeg({ quality: 80 })
+                        .toBuffer();
+                    await sock.sendMessage(msg.chat, {
+                        image: imageBuffer,
+                        caption: menu,
+                        mimetype: 'image/jpeg'
+                    });
+                } catch (sharpErr) {
+                    // Fallback: send original PNG
+                    await sock.sendMessage(msg.chat, {
+                        image: imageBuffer,
+                        caption: menu,
+                        mimetype: 'image/png'
+                    });
+                }
+                return;
+            } catch (err) {
+                console.error('Menu image error:', err.message);
             }
-        } catch (err) {
-            console.error('Menu send error:', err.message);
-            await extra.reply(menu);
         }
+
+        // Final fallback: text only
+        await extra.reply(menu);
     }
 };
