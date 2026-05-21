@@ -30,6 +30,7 @@ module.exports = async (sock, msg, commandHandler, prefix, botName) => {
         // Extra functions for commands
         const extra = {
             sender: formattedMsg.sender,
+            from: formattedMsg.chat,
             chat: formattedMsg.chat,
             isGroup: formattedMsg.isGroup,
             isAdmin: formattedMsg.isAdmin,

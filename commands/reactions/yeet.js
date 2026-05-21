@@ -19,7 +19,7 @@ module.exports = {
             const buffer = Buffer.from(response.data);
             
             await sock.sendMessage(extra.from, {
-                gif: buffer,
+                video: buffer, gifPlayback: true,
                 caption: `@${extra.sender.split('@')[0]} yeets @${target.split('@')[0]} 🚀`,
                 mentions: [extra.sender, target]
             }, { quoted: msg });

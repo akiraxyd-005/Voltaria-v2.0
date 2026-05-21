@@ -9,7 +9,7 @@ module.exports = {
     async execute(sock, msg, args, extra) {
         if (!msg.isGroup) return await extra.reply('❌ NSFW commands are only available in groups.');
         try {
-            let imageUrl = await hmtai.getNSFW('trap');
+            let imageUrl = hmtai.nsfw.thighs();
             await sock.sendMessage(msg.chat, { image: { url: imageUrl }, caption: '◆ *Trap*' });
         } catch (error) {
             await extra.reply(`❌ Error: ${error.message}`);

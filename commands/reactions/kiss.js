@@ -16,13 +16,13 @@ module.exports = {
             
             if (target) {
                 await sock.sendMessage(extra.from, {
-                    gif: buffer,
+                    video: buffer, gifPlayback: true,
                     caption: `@${extra.sender.split('@')[0]} kisses @${target.split('@')[0]} 😘`,
                     mentions: [extra.sender, target]
                 }, { quoted: msg });
             } else {
                 await sock.sendMessage(extra.from, {
-                    gif: buffer,
+                    video: buffer, gifPlayback: true,
                     caption: `@${extra.sender.split('@')[0]} sends a kiss 😘`,
                     mentions: [extra.sender]
                 }, { quoted: msg });
