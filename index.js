@@ -35,7 +35,6 @@ global.reportCooldowns = {};
 global.bannedReporters = [];
 global.sudoUsers = [];
 
-// Web server
 app.get('/', async (req, res) => {
     if (isConnected) {
         res.send('<h1>✅ Voltaria Bot is Online!</h1><p>Bot is connected and working.</p>');
@@ -83,7 +82,6 @@ async function startBot() {
         }
     });
 
-    // PAIRING CODE ONLY - NO QR
     const pairingNumber = process.env.PAIRING_NUMBER;
     if (pairingNumber) {
         setTimeout(async () => {
