@@ -1,10 +1,9 @@
 process.env.PUPPETEER_SKIP_DOWNLOAD = 'true';
 process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
 
-// Ensure runtime dirs exist
 const fs = require('fs');
 if (!fs.existsSync('./temp')) fs.mkdirSync('./temp', { recursive: true });
-if (!fs.existsSync('./lib'))  fs.mkdirSync('./lib',  { recursive: true });
+if (!fs.existsSync('./lib')) fs.mkdirSync('./lib', { recursive: true });
 
 const express = require('express');
 const pino = require('pino');
@@ -19,7 +18,6 @@ const qrcode = require('qrcode-terminal');
 const config = require('./config');
 const handler = require('./handler');
 
-// Load command handlers
 const commandHandler = require('./handlers/command-handler');
 const messageHandler = require('./handlers/message-handler');
 
@@ -29,12 +27,10 @@ const PORT = process.env.PORT || 5000;
 let latestQR = null;
 let isConnected = false;
 
-// Settings
 const prefix = config.prefix || '§';
 const botName = config.botName || 'Voltaria Nexus';
 const ownerNumber = config.ownerNumber || ['254108720384'];
 
-// Global variables
 global.owner = ownerNumber;
 global.disabledGroups = [];
 global.nsfwDisabledGroups = [];
@@ -42,14 +38,23 @@ global.reportCooldowns = {};
 global.bannedReporters = [];
 global.sudoUsers = [];
 
-// Web server
 app.get('/', async (req, res) => {
     if (isConnected) {
         res.send('<h1>✅ Voltaria Bot is Online!</h1>');
     } else if (latestQR) {
         const QRCode = require('qrcode');
         const qrImage = await QRCode.toDataURL(latestQR);
-        res.send(`<img src="${qrImage}" style="width:300px;"/>`);
+        res.send(`
+            <html>
+                <head><title>Voltaria Nexus - QR Code</title></head>
+                <body style="text-align:center;background:#0a0a0a;color:white;font-family:Arial">
+                    <h2>⚡ Voltaria Nexus</h2>
+                    <img src="${qrImage}" style="width:300px;border-radius:10px"/>
+                    <p>Scan this QR with WhatsApp</p>
+                    <p>Settings → Linked Devices → Link a Device</p>
+                </body>
+            </html>
+        `);
     } else {
         res.send('<h1>🚀 Starting Voltaria Bot...</h1>');
     }
@@ -98,7 +103,8 @@ async function startBot() {
         if (qr) {
             latestQR = qr;
             isConnected = false;
-            console.log('📱 QR Code generated!');
+            console.log('\n📱 QR CODE GENERATED');
+            console.log(`🔗 Web view: https://${process.env.RAILWAY_STATIC_URL || 'localhost'}/`);
             qrcode.generate(qr, { small: true });
         }
 
@@ -122,24 +128,29 @@ async function startBot() {
         }
     });
 
+    // PAIRING CODE FOR RAILWAY (BEST SOLUTION)
+    const pairingNumber = process.env.PAIRING_NUMBER;
+    if (pairingNumber && !state.creds.registered) {
+        setTimeout(async () => {
+            try {
+                const code = await sock.requestPairingCode(pairingNumber);
+                console.log(`\n✅ PAIRING CODE: ${code}\n`);
+                console.log(`📱 Go to WhatsApp → Settings → Linked Devices → Link with phone number`);
+                console.log(`🔢 Enter this code: ${code}\n`);
+            } catch (err) {
+                console.error('Pairing code error:', err.message);
+            }
+        }, 2000);
+    }
+
     sock.ev.on('creds.update', saveCreds);
     
-    // Handle messages with both old and new handler systems
     sock.ev.on('messages.upsert', async ({ messages, type }) => {
         if (type !== 'notify') return;
         for (const msg of messages) {
-            const jid = msg.key?.remoteJid || '';
             if (!msg.message) continue;
-            if (jid === 'status@broadcast') continue;
-
-            const body = msg.message?.conversation || msg.message?.extendedTextMessage?.text || '';
-            const isFromMe = msg.key.fromMe;
-
-            // Log every incoming message for debugging
-            console.log(`📨 MSG | fromMe=${isFromMe} | jid=${jid.split('@')[0]} | body=${body.slice(0, 80)}`);
-
-            // Allow owner self-commands (fromMe) only if they start with the prefix
-            if (isFromMe && !body.startsWith(prefix)) continue;
+            if (msg.key.remoteJid === 'status@broadcast') continue;
+            if (msg.key.fromMe && !msg.message?.conversation?.startsWith(prefix)) continue;
 
             try {
                 await messageHandler(sock, msg, commandHandler, prefix, botName);
@@ -149,20 +160,9 @@ async function startBot() {
         }
     });
 
-    // Handle group updates
-    sock.ev.on('group-participants.update', async (update) => {
-        // Handle welcome/goodbye here if needed
-    });
-
-    // Handle presence updates
-    sock.ev.on('presence.update', async (update) => {
-        // Optional: track user presence
-    });
-
     return sock;
 }
 
-// Handle process termination
 process.on('SIGINT', async () => {
     console.log('🛑 Bot shutting down...');
     process.exit(0);
