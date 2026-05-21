@@ -13,18 +13,31 @@ module.exports = {
             return extra.reply(`❌ *Usage:* §ss <url>\n\nExample: §ss https://google.com`);
         }
         
+        if (!url.startsWith('http')) url = 'https://' + url;
         await extra.reply(`📸 *Taking screenshot...*`);
-        
+
+        const tryScreenshot = async (screenshotUrl) => {
+            const res = await axios.get(screenshotUrl, { responseType: 'arraybuffer', timeout: 20000 });
+            return Buffer.from(res.data);
+        };
+
         try {
-            const response = await axios.get(`https://api.screenshotmachine.com/?key=${process.env.SCREENSHOT_API_KEY}&url=${encodeURIComponent(url)}&dimension=1024x768`);
-            const imageBuffer = Buffer.from(response.data, 'binary');
-            
+            let imageBuffer;
+            try {
+                const apiRes = await axios.get(`https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`, { timeout: 15000 });
+                if (typeof apiRes.data === 'string' && apiRes.data.startsWith('http')) {
+                    imageBuffer = await tryScreenshot(apiRes.data);
+                } else { throw new Error('no url'); }
+            } catch {
+                imageBuffer = await tryScreenshot(`https://image.thum.io/get/width/1280/crop/720/noanimate/${url}`);
+            }
+
             await sock.sendMessage(extra.from, {
                 image: imageBuffer,
                 caption: `📸 *Screenshot of ${url}*\n\n> ©POWERED BY NEXUS`
             }, { quoted: msg });
         } catch (error) {
-            await extra.reply(`❌ Screenshot failed. Make sure the URL is valid.\n\n> ©POWERED BY NEXUS`);
+            await extra.reply(`❌ Screenshot failed. URL may be unreachable.\n\n> ©POWERED BY NEXUS`);
         }
     }
 };

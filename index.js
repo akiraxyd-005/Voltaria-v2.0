@@ -1,6 +1,11 @@
 process.env.PUPPETEER_SKIP_DOWNLOAD = 'true';
 process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
 
+// Ensure runtime dirs exist
+const fs = require('fs');
+if (!fs.existsSync('./temp')) fs.mkdirSync('./temp', { recursive: true });
+if (!fs.existsSync('./lib'))  fs.mkdirSync('./lib',  { recursive: true });
+
 const express = require('express');
 const pino = require('pino');
 const {

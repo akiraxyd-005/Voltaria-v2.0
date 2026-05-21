@@ -1,5 +1,5 @@
 const ytSearch = require('yt-search');
-const ytdl = require('ytdl-core');
+const ytdl = require('@distube/ytdl-core');
 
 // Store active searches
 const activeSearches = new Map();

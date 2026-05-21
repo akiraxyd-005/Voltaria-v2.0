@@ -21,6 +21,7 @@
   "author": "⚜️𝓐𝓻𝓪𝓼𝓱𝓲⚜️",
   "license": "MIT",
   "dependencies": {
+    "@distube/ytdl-core": "^4.16.12",
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "^6.7.5",
     "adm-zip": "^0.5.17",

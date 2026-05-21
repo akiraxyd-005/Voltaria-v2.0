@@ -19,7 +19,7 @@ module.exports = {
             let videoUrl = null;
             
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                const ytdl = require('ytdl-core');
+                const ytdl = require('@distube/ytdl-core');
                 const info = await ytdl.getInfo(url);
                 videoUrl = info.videoDetails.video_url;
             } else if (url.includes('tiktok.com')) {
