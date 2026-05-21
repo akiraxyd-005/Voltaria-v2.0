@@ -1,22 +1,20 @@
-cat > config.example.js << 'EOF'
 module.exports = {
-    prefix: '§',
-    botName: 'Voltaria Nexus',
-    ownerNumber: ['YOUR_NUMBER_HERE'],
+    prefix: process.env.PREFIX || '§',
+    botName: process.env.BOT_NAME || 'Voltaria Nexus',
+    ownerNumber: (process.env.OWNER_NUMBER || '254108720384').split(','),
     sessionName: 'session',
-    mongodbUrl: '',
+    mongodbUrl: process.env.MONGODB_URL || '',
     timezone: 'Africa/Nairobi',
     packName: 'Voltaria',
     authorName: 'Nexus',
     stickerPack: 'Voltaria Nexus',
     apiKeys: {
-        gemini: 'YOUR_GEMINI_API_KEY',
-        openai: '',
-        weather: 'YOUR_WEATHER_API_KEY',
+        gemini: process.env.GEMINI_API_KEY || 'YOUR_GEMINI_API_KEY',
+        openai: process.env.OPENAI_API_KEY || '',
+        weather: process.env.WEATHER_API_KEY || 'YOUR_WEATHER_API_KEY',
         spotify: {
-            clientId: '',
-            clientSecret: ''
+            clientId: process.env.SPOTIFY_CLIENT_ID || '',
+            clientSecret: process.env.SPOTIFY_CLIENT_SECRET || ''
         }
     }
 };
-EOF
