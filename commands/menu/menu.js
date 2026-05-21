@@ -12,74 +12,253 @@ module.exports = {
         const days = Math.floor(uptime / 86400);
         const hours = Math.floor((uptime % 86400) / 3600);
         const minutes = Math.floor((uptime % 3600) / 60);
-        
-        const menu = `╭──────༺𓆩⛧𓆪༻──────╮
-          .VOLTARIA.
-╰──────༺𓆩⛧𓆪༻──────╯
 
-Yo, *${msg.pushName || 'Guest'}* !
+        const menu = `╔════════════════════════╗
+║     *⎋Voltaria DASHBOARD⎋*
+╚════════════════════════╝
+ » 👤 *USER:* ${msg.pushName || 'Guest'}
+ » 🚀 *UPTIME:* ${days}d ${hours}h ${minutes}m
+ » 🏷️ *PREFIX:* §
+ » 📦 *VERSION:* 3.4.0
+══════════════════════════
 
-╭───────────────╮
-│ ⚡ Prefix : §
-│ 🚀 Version : 3.4.0
-│ ⏳ Uptime : ${days}d ${hours}h ${minutes}m
-│ 👥 Users : 10,051
-│ 📅 Date : ${new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
-╰───────────────╯
+┌───⊷ 🤖 *ai*
+│ ⌘ §gpt
+│ ⌘ §gemini
+│ ⌘ §vision
+│ ⌘ §summarize
+│ ⌘ §recipe
+│ ⌘ §tts
+│ ⌘ §removebg
+│ ⌘ §enhance
+│ ⌘ §upscale
+│ ⌘ §agentmode
+└──────────────⊷
 
-༺═━━〔 COMMAND CATEGORIES 〕━━═༻
+┌───⊷ 🎌 *anime*
+│ ⌘ §anime
+│ ⌘ §animequote
+│ ⌘ §waifu
+│ ⌘ §neko
+│ ⌘ §foxxgirl
+│ ⌘ §character
+└──────────────⊷
 
-༺🤖༻ §menu ai
-༺🎐༻ §menu anime
-༺🎵༻ §menu audio
-༺⚙️༻ §menu config
-༺♻️༻ §menu debug
-༺📥༻ §menu download
-༺💎༻ §menu economy
-༺🎉༻ §menu fun
-༺🎮༻ §menu games
-༺🧑‍🧑‍🧒‍🧒༻ §menu group
-༺🔞༻ §menu hentai
-༺ℹ️༻ §menu info
-༺🎨༻ §menu logo
-༺🖼️༻ §menu media
-༺📦༻ §menu misc
-༺⚜️༻ §menu owner
-༺💫༻ §menu reactions
-༺📖༻ §menu religion
-༺🔍༻ §menu search
-༺🔐༻ §menu session
-༺⚙️༻ §menu settings
-༺✍️༻ §menu text
-༺🛠️༻ §menu tools
-༺🧩༻ §menu utility
-༺📱༻ §menu whatsapp
+┌───⊷ 🎵 *audio*
+│ ⌘ §deep
+│ ⌘ §nightcore
+│ ⌘ §robot
+│ ⌘ §bass
+│ ⌘ §chipmunk
+│ ⌘ §earrape
+│ ⌘ §slow
+│ ⌘ §fast
+│ ⌘ §reverse
+└──────────────⊷
 
-༺═━━〔 QUICK COMMANDS 〕━━═༻
+┌───⊷ 📥 *download*
+│ ⌘ §play
+│ ⌘ §yt
+│ ⌘ §ytvideo
+│ ⌘ §yts
+│ ⌘ §tiktok
+│ ⌘ §instagram
+│ ⌘ §twitter
+│ ⌘ §facebook
+│ ⌘ §capcut
+└──────────────⊷
 
-༺⚡༻ §ping
-༺🤖༻ §gpt
-༺🎧༻ §play
-༺🖼️༻ §sticker
-༺👤༻ §profile
-༺💎༻ §daily
-༺🎮༻ §ttt
-༺🔍༻ §weather
+┌───⊷ 💰 *economy*
+│ ⌘ §balance
+│ ⌘ §work
+│ ⌘ §daily
+│ ⌘ §rob
+│ ⌘ §pay
+│ ⌘ §slots
+│ ⌘ §blackjack
+│ ⌘ §coinflip
+│ ⌘ §dice
+│ ⌘ §profile
+└──────────────⊷
 
-╭────༺☾༻────╮
-│ Type §menu <category>
-╰────༺☾༻────╯
+┌───⊷ 🎮 *games*
+│ ⌘ §ttt
+│ ⌘ §hangman
+│ ⌘ §trivia
+│ ⌘ §wordle
+│ ⌘ §riddle
+│ ⌘ §whoami
+│ ⌘ §wyr
+└──────────────⊷
 
-> ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$`;
+┌───⊷ 👥 *group*
+│ ⌘ §tagall
+│ ⌘ §poll
+│ ⌘ §warn
+│ ⌘ §kick
+│ ⌘ §promote
+│ ⌘ §demote
+│ ⌘ §mute
+│ ⌘ §antilink
+│ ⌘ §welcome
+│ ⌘ §goodbye
+└──────────────⊷
+
+┌───⊷ 🔞 *hentai*
+│ ⌘ §waifu
+│ ⌘ §hentai
+│ ⌘ §hentaigif
+│ ⌘ §trap
+│ ⌘ §cum
+│ ⌘ §panties
+└──────────────⊷
+
+┌───⊷ ℹ️ *info*
+│ ⌘ §botinfo
+│ ⌘ §groupinfo
+│ ⌘ §whois
+│ ⌘ §getpp
+│ ⌘ §cinfo
+│ ⌘ §repo
+└──────────────⊷
+
+┌───⊷ 🖼️ *media*
+│ ⌘ §toimg
+│ ⌘ §tomp3
+│ ⌘ §toaudio
+│ ⌘ §toptt
+│ ⌘ §tovideo
+│ ⌘ §togif
+└──────────────⊷
+
+┌───⊷ 🎯 *misc*
+│ ⌘ §ping
+│ ⌘ §uptime
+│ ⌘ §alive
+│ ⌘ §owner
+│ ⌘ §echo
+│ ⌘ §report
+└──────────────⊷
+
+┌───⊷ 👑 *owner*
+│ ⌘ §on
+│ ⌘ §off
+│ ⌘ §nsfw
+│ ⌘ §broadcast
+│ ⌘ §restart
+│ ⌘ §ban
+│ ⌘ §unban
+└──────────────⊷
+
+┌───⊷ 💕 *reactions*
+│ ⌘ §hug
+│ ⌘ §kiss
+│ ⌘ §slap
+│ ⌘ §pat
+│ ⌘ §cuddle
+│ ⌘ §dance
+└──────────────⊷
+
+┌───⊷ 📖 *religion*
+│ ⌘ §bible
+│ ⌘ §quran
+└──────────────⊷
+
+┌───⊷ 🔍 *search*
+│ ⌘ §google
+│ ⌘ §image
+│ ⌘ §weather
+│ ⌘ §news
+│ ⌘ §wiki
+└──────────────⊷
+
+┌───⊷ 🔐 *session*
+│ ⌘ §pair
+│ ⌘ §addsession
+│ ⌘ §listsessions
+│ ⌘ §delsession
+└──────────────⊷
+
+┌───⊷ ⚙️ *settings*
+│ ⌘ §setbio
+│ ⌘ §setname
+│ ⌘ §setpp
+│ ⌘ §getprivacy
+│ ⌘ §setprivacy
+└──────────────⊷
+
+┌───⊷ 📝 *text*
+│ ⌘ §say
+│ ⌘ §fancy
+│ ⌘ §fancylist
+└──────────────⊷
+
+┌───⊷ ✨ *textmaker*
+│ ⌘ §1917
+│ ⌘ §neon
+│ ⌘ §glitch
+│ ⌘ §fire
+│ ⌘ §matrix
+│ ⌘ §hacker
+└──────────────⊷
+
+┌───⊷ 🔧 *tools*
+│ ⌘ §sticker
+│ ⌘ §qr
+│ ⌘ §readqr
+│ ⌘ §schedule
+│ ⌘ §trt
+│ ⌘ §ss
+│ ⌘ §afk
+│ ⌘ §calc
+└──────────────⊷
+
+┌───⊷ 🛠️ *utility*
+│ ⌘ §fakeid
+│ ⌘ §tempmail
+│ ⌘ §remind
+│ ⌘ §tourl
+└──────────────⊷
+
+┌───⊷ 📱 *whatsapp*
+│ ⌘ §unsend
+│ ⌘ §forward
+│ ⌘ §block
+│ ⌘ §unblock
+│ ⌘ §clear
+│ ⌘ §pinchat
+│ ⌘ §archive
+│ ⌘ §del
+└──────────────⊷
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📂 *View a category:*
+  §menu <category>
+
+  🤖 ai  •  🎌 anime  •  🎵 audio  •  📥 download  •  💰 economy
+  🎮 games  •  👥 group  •  🔞 hentai  •  ℹ️ info  •  🖼️ media
+  🎯 misc  •  👑 owner  •  💕 reactions  •  📖 religion  •  🔍 search
+  🔐 session  •  ⚙️ settings  •  📝 text  •  ✨ textmaker  •  🔧 tools
+  🛠️ utility  •  📱 whatsapp
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+> ©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴠᴏʟᴛᴀʀɪᴀ ɴᴇxᴜꜱ`;
 
         const menuImagePath = path.join(__dirname, '../../assets/menu.png');
-        
-        if (fs.existsSync(menuImagePath)) {
-            await sock.sendMessage(msg.chat, {
-                image: fs.readFileSync(menuImagePath),
-                caption: menu
-            });
-        } else {
+
+        try {
+            if (fs.existsSync(menuImagePath)) {
+                const imageBuffer = fs.readFileSync(menuImagePath);
+                await sock.sendMessage(msg.chat, {
+                    image: imageBuffer,
+                    caption: menu,
+                    mimetype: 'image/png'
+                });
+            } else {
+                await extra.reply(menu);
+            }
+        } catch (err) {
+            console.error('Menu send error:', err.message);
             await extra.reply(menu);
         }
     }
