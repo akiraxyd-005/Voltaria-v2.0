@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Voltaria Nexus • Pairing Code Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f1e 0%, #0c1222 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 550px;
+            width: 100%;
+            background: rgba(18, 25, 45, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(95deg, #6b21a5 0%, #d946ef 100%);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .badge {
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .content {
+            padding: 2rem 1.5rem;
+        }
+
+        .server-selector {
+            background: #0f1425;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #1e2a3e;
+        }
+
+        .server-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .server-btn {
+            background: #0a0f1a;
+            border: 1px solid #1f2a3e;
+            padding: 8px 5px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #b9c3d4;
+        }
+
+        .server-btn.active {
+            background: linear-gradient(95deg, #6b21a5, #c026d3);
+            border-color: #c241ff;
+            color: white;
+            box-shadow: 0 0 8px rgba(192, 38, 211, 0.4);
+        }
+
+        .input-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #cbd5e6;
+            font-size: 0.85rem;
+        }
+
+        .phone-input {
+            display: flex;
+            background: #0f1425;
+            border-radius: 1rem;
+            border: 1px solid #1e2a3e;
+            overflow: hidden;
+        }
+
+        .country-code {
+            background: #1a1f32;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: white;
+            border-right: 1px solid #2d3a4e;
+        }
+
+        .phone-input input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 14px 15px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(95deg, #2563eb, #7c3aed);
+            border: none;
+            padding: 14px;
+            border-radius: 1.2rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 1.5rem;
+        }
+
+        .generate-btn:active {
+            transform: scale(0.97);
+        }
+
+        .code-box {
+            background: #0b0f1a;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            border: 1px dashed #3b4b6e;
+        }
+
+        .code-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7c8db0;
+        }
+
+        .code-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            font-family: monospace;
+            background: #010101;
+            padding: 12px;
+            border-radius: 14px;
+            margin: 12px 0;
+            color: #a5f3ff;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #1e2a3a;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .footer {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #5a6e8a;
+            padding: 1rem;
+            border-top: 1px solid #1a2538;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: #bbf0ff;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            z-index: 999;
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        @media (max-width: 480px) {
+            .server-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            }
+            .code-value {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>⚡ VOLTARIA NEXUS</h1>
+        <p>Instant Pairing Code Generator</p>
+        <div class="badge">🔐 No QR • No Deployment</div>
+    </div>
+
+    <div class="content">
+        <div class="server-selector">
+            <div style="font-size:0.8rem; font-weight:500;">🌐 SELECT SERVER</div>
+            <div class="server-grid" id="serverGrid">
+                <!-- JS will generate server buttons -->
+            </div>
+            <div style="font-size:0.7rem; margin-top:10px; color:#7b8fb0;" id="serverStatus">Active: -- &nbsp;| Limit: --/50</div>
+        </div>
+
+        <div class="input-group">
+            <label>📞 WHATSAPP NUMBER</label>
+            <div class="phone-input">
+                <span class="country-code">+</span>
+                <input type="tel" id="phoneNumber" placeholder="254735563497" value="254735563497">
+            </div>
+            <div style="font-size:0.7rem; margin-top:8px; color:#6b82a5;">🔹 Include country code (e.g., 254 for Kenya)</div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn">✨ GENERATE PAIRING CODE ✨</button>
+
+        <div class="code-box">
+            <div class="code-label">🔑 YOUR PAIRING CODE</div>
+            <div class="code-value" id="codeDisplay">—— ————</div>
+            <button class="copy-btn" id="copyBtn">📋 COPY CODE</button>
+            <div style="font-size:0.7rem; margin-top:10px;">⏱️ Valid for 5 minutes • One-time use</div>
+        </div>
+    </div>
+    <div class="footer">
+        ⚡ Powered by Voltaria Nexus • Code expires after use
+    </div>
+</div>
+<div id="toastMsg" class="toast">✨ Code copied!</div>
+
+<script>
+    // -------------------------------
+    // 1. Generate 50 dummy servers (interactive)
+    // -------------------------------
+    const serverGrid = document.getElementById('serverGrid');
+    const serverStatusSpan = document.getElementById('serverStatus');
+    let selectedServer = null;
+    let activeServerCount = Math.floor(Math.random() * 15) + 25; // Simulated active servers between 25-40
+
+    // Create server buttons (1 to 50)
+    for (let i = 1; i <= 50; i++) {
+        const btn = document.createElement('button');
+        btn.classList.add('server-btn');
+        btn.innerText = `Server ${i}`;
+        btn.dataset.server = i;
+        btn.addEventListener('click', () => {
+            // Remove active class from all
+            document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedServer = i;
+            // Update status text
+            serverStatusSpan.innerText = `Active: ${activeServerCount} servers | Limit: 0/50 used`;
+        });
+        serverGrid.appendChild(btn);
+    }
+
+    // Select Server 1 by default
+    const firstBtn = document.querySelector('.server-btn');
+    if (firstBtn) {
+        firstBtn.classList.add('active');
+        selectedServer = 1;
+        serverStatusSpan.innerText = `Active: ${activeServerCount} servers | Limit: 0/50 used`;
+    }
+
+    // -------------------------------
+    // 2. Helper: Display toast message
+    // -------------------------------
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        toast.innerText = msg;
+        toast.style.opacity = '1';
+        setTimeout(() => {
+            toast.style.opacity = '0';
+        }, 2000);
+    }
+
+    // -------------------------------
+    // 3. Generate pairing code (actual request to your backend)
+    // -------------------------------
+    async function generatePairingCode(phoneNumber, serverId) {
+        const displayDiv = document.getElementById('codeDisplay');
+        displayDiv.innerText = '⏳ Generating...';
+        
+        // ---- IMPORTANT: Replace this URL with your ACTUAL Railway/Render backend ----
+        // Example: https://voltaria-api.up.railway.app/api/pair
+        const API_BACKEND_URL = 'https://your-backend.onrender.com/api/request-pair'; 
+        
+        try {
+            // OPTION 1: If your backend has an endpoint that triggers pairing
+            const response = await fetch(API_BACKEND_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    number: phoneNumber,
+                    server: serverId
+                })
+            });
+            
+            const data = await response.json();
+            if (data.code) {
+                displayDiv.innerText = data.code;
+                showToast('✅ Code received!');
+            } else {
+                displayDiv.innerText = '❌ Failed';
+                showToast(data.error || 'Server error');
+            }
+        } catch (err) {
+            console.error(err);
+            // FALLBACK DEMO: Remove this after connecting real backend
+            // This is just to show UI works – your real backend will replace it.
+            const demoCode = Math.floor(100000 + Math.random() * 900000);
+            displayDiv.innerText = demoCode;
+            showToast('⚠️ DEMO MODE: Connect actual backend to get real codes');
+        }
+    }
+
+    // -------------------------------
+    // 4. Handle generate button click
+    // -------------------------------
+    const generateBtn = document.getElementById('generateBtn');
+    const phoneInput = document.getElementById('phoneNumber');
+    const copyBtn = document.getElementById('copyBtn');
+    const codeDisplayDiv = document.getElementById('codeDisplay');
+
+    generateBtn.addEventListener('click', async () => {
+        let rawPhone = phoneInput.value.trim();
+        if (!rawPhone) {
+            showToast('❌ Enter WhatsApp number');
+            return;
+        }
+        // Remove any leading '+'
+        rawPhone = rawPhone.replace(/^\+/, '');
+        if (!rawPhone.match(/^\d{10,15}$/)) {
+            showToast('❌ Invalid number. Use country code + number (2547xxxxxx)');
+            return;
+        }
+        if (!selectedServer) {
+            showToast('❌ Please select a server');
+            return;
+        }
+
+        await generatePairingCode(rawPhone, selectedServer);
+    });
+
+    // -------------------------------
+    // 5. Copy to clipboard
+    // -------------------------------
+    copyBtn.addEventListener('click', () => {
+        const codeText = codeDisplayDiv.innerText;
+        if (!codeText || codeText === '—— ————' || codeText.includes('❌') || codeText.includes('⏳')) {
+            showToast('❗ No valid code to copy');
+            return;
+        }
+        navigator.clipboard.writeText(codeText);
+        showToast('📋 Pairing code copied!');
+    });
+</script>
+</body>
+</html>
