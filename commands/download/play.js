@@ -1,91 +1,106 @@
 const ytSearch = require('yt-search');
 const ytdl = require('@distube/ytdl-core');
+const fs = require('fs');
+const path = require('path');
 
-// Store active searches
+const FOOTER = '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n> ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$';
 const activeSearches = new Map();
+
+async function downloadAudio(videoUrl, tmpFile) {
+    return new Promise((resolve, reject) => {
+        const stream = ytdl(videoUrl, { filter: 'audioonly', quality: 'highestaudio' });
+        const ws = fs.createWriteStream(tmpFile);
+        stream.pipe(ws);
+        ws.on('finish', resolve);
+        ws.on('error', reject);
+        stream.on('error', reject);
+    });
+}
 
 module.exports = {
     name: 'play',
-    aliases: ['song', 'music', 'yt'],
+    aliases: ['song', 'yt'],
     category: 'download',
     description: 'Search and play music from YouTube',
-    usage: '§play song name',
+    usage: '§play <song name>',
     async execute(sock, msg, args, extra) {
-        // Check if this is a number reply to an active search
         const num = parseInt(args[0]);
         const searchData = activeSearches.get(msg.sender);
-        
+
+        // USER REPLIED WITH A NUMBER — DOWNLOAD & SEND AUDIO
         if (searchData && !isNaN(num) && num >= 1 && num <= searchData.videos.length) {
-            // User selected a number - send the audio
             const selected = searchData.videos[num - 1];
-            
-            // Delete the results message
+            activeSearches.delete(msg.sender);
+
+            // Try to delete the results message
             try {
-                await sock.sendMessage(msg.chat, { delete: searchData.messageId });
-            } catch (err) {}
-            
+                if (searchData.messageKey) {
+                    await sock.sendMessage(msg.chat, { delete: searchData.messageKey });
+                }
+            } catch (_) {}
+
             await extra.reply(`🎵 *Downloading:* ${selected.title}...`);
-            
+
+            const tmpFile = path.join('./temp', `play_${Date.now()}.mp3`);
             try {
-                const audioStream = ytdl(selected.url, { filter: 'audioonly', quality: 'highestaudio' });
-                
+                if (!fs.existsSync('./temp')) fs.mkdirSync('./temp', { recursive: true });
+                await downloadAudio(selected.url, tmpFile);
+
+                const audioBuffer = fs.readFileSync(tmpFile);
+                fs.unlinkSync(tmpFile);
+
+                const title = selected.title.substring(0, 60);
                 await sock.sendMessage(msg.chat, {
-                    audio: audioStream,
+                    audio: audioBuffer,
                     mimetype: 'audio/mpeg',
-                    fileName: `${selected.title}.mp3`
-                });
-                
-                await extra.reply(`✅ *Sent!*\n🔗 ${selected.url}`);
-                activeSearches.delete(msg.sender);
-            } catch (error) {
-                await extra.reply(`❌ Download failed: ${error.message}`);
+                    fileName: `${title}.mp3`
+                }, { quoted: msg });
+
+                await extra.reply(`✅ *Sent:* ${title}\n🔗 ${selected.url}${FOOTER}`);
+            } catch (err) {
+                if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
+                await extra.reply(`❌ Download failed: ${err.message}\n\nTry §ytmp3 <URL> directly.${FOOTER}`);
             }
             return;
         }
-        
-        // Normal search flow
-        if (!args.length) return await extra.reply('❌ Provide a song name.\nUsage: §play Shape of You');
 
+        // NORMAL SEARCH — SHOW RESULTS LIST
         const query = args.join(' ');
-        await extra.reply(`🔍 *Searching* for "${query}"...`);
+        if (!query) return await extra.reply(`❌ Provide a song name.\n\nUsage: §play Shape of You${FOOTER}`);
+
+        await extra.reply(`🔍 *Searching for* "${query}"...`);
 
         try {
             const result = await ytSearch(query);
             const videos = result.videos.slice(0, 10);
+            if (!videos.length) return await extra.reply(`❌ No results found.${FOOTER}`);
 
-            if (!videos.length) return await extra.reply('❌ No results found.');
-
-            let resultsList = `◆ *RESULTS FOR* ${query.toUpperCase()}\n\n*Reply with the number of the desired search result to get the audio.*\n\n`;
-            
-            videos.forEach((video, index) => {
-                const num = index + 1;
-                const duration = video.timestamp || 'Unknown';
-                const title = video.title.length > 50 ? video.title.substring(0, 47) + '...' : video.title;
-                resultsList += `*${num}:* ${title} (${duration})\n`;
+            let list = `◆ *RESULTS FOR* ${query.toUpperCase()}\n\n*Reply with the number to get the audio.*\n\n`;
+            videos.forEach((v, i) => {
+                const title = v.title.length > 50 ? v.title.substring(0, 47) + '...' : v.title;
+                list += `*${i + 1}:* ${title} _(${v.timestamp || '?'})_\n`;
             });
-            
-            resultsList += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n> ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$`;
+            list += FOOTER;
 
-            const sentMsg = await extra.reply(resultsList);
-            
-            // Store search results
+            const sentMsg = await extra.reply(list);
+
             activeSearches.set(msg.sender, {
-                videos: videos,
-                messageId: { id: sentMsg.key?.id, remoteJid: msg.chat, fromMe: true },
+                videos,
+                messageKey: sentMsg?.key || null,
                 chatId: msg.chat,
                 timestamp: Date.now()
             });
 
-            // Auto-cleanup after 2 minutes
+            // Auto-cleanup after 3 minutes
             setTimeout(() => {
-                if (activeSearches.get(msg.sender)?.timestamp === searchData?.timestamp) {
+                const cur = activeSearches.get(msg.sender);
+                if (cur?.timestamp === activeSearches.get(msg.sender)?.timestamp) {
                     activeSearches.delete(msg.sender);
                 }
-            }, 120000);
+            }, 180000);
 
-        } catch (error) {
-            console.error(error);
-            await extra.reply(`❌ Error: ${error.message}`);
+        } catch (err) {
+            await extra.reply(`❌ Search failed: ${err.message}${FOOTER}`);
         }
     }
 };

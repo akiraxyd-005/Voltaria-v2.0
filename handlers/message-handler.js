@@ -8,6 +8,7 @@ module.exports = async (sock, msg, commandHandler, prefix, botName) => {
 
         // Format message object
         const formattedMsg = {
+            key: msg.key,
             chat: msg.key.remoteJid,
             sender: msg.key.participant || msg.key.remoteJid,
             isGroup: msg.key.remoteJid.endsWith('@g.us'),
@@ -37,7 +38,7 @@ module.exports = async (sock, msg, commandHandler, prefix, botName) => {
             isOwner: formattedMsg.isOwner,
             pushName: formattedMsg.pushName,
             reply: async (text, options = {}) => {
-                await sock.sendMessage(formattedMsg.chat, { text, ...options });
+                return await sock.sendMessage(formattedMsg.chat, { text, ...options });
             },
             sendImage: async (url, caption) => {
                 await sock.sendMessage(formattedMsg.chat, { image: { url }, caption });

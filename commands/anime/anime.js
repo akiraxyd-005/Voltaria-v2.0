@@ -1,41 +1,21 @@
 const axios = require('axios');
-
+const FOOTER = '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n> ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$';
 module.exports = {
-    name: 'anime',
-    aliases: ['animeinfo', 'animesearch'],
-    category: 'anime',
-    description: 'Search for anime information',
-    usage: '§anime <name>',
+    name: 'anime', aliases: ['animeinfo', 'animesearch'], category: 'anime',
+    description: 'Search for anime information', usage: '§anime <name>',
     async execute(sock, msg, args, extra) {
         const query = args.join(' ');
         if (!query) return extra.reply('❌ Please provide an anime name.\n\nExample: §anime naruto');
-
         try {
-            const { data } = await axios.get(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=1`);
-            
-            if (!data.data || data.data.length === 0) {
-                return extra.reply(`❌ No anime found for "${query}"`);
-            }
-
-            const anime = data.data[0];
-            const title = anime.title;
-            const episodes = anime.episodes || 'Unknown';
-            const status = anime.status;
-            const score = anime.score || 'N/A';
-            const synopsis = anime.synopsis?.substring(0, 300) + '...';
-            const image = anime.images.jpg.image_url;
-
-            const response = await axios.get(image, { responseType: 'arraybuffer' });
-            const buffer = Buffer.from(response.data);
-
-            await sock.sendMessage(extra.from, {
-                image: buffer,
-                caption: `📺 *${title}*\n\n🎬 Episodes: ${episodes}\n📊 Status: ${status}\n⭐ Score: ${score}\n\n📝 *Synopsis:*\n${synopsis}`
+            const { data } = await axios.get(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=1`, { timeout: 10000 });
+            if (!data.data || !data.data.length) return extra.reply(`❌ No anime found for "${query}"`);
+            const a = data.data[0];
+            const synopsis = a.synopsis ? a.synopsis.substring(0, 300) + '...' : 'No synopsis available.';
+            const image = a.images.jpg.image_url;
+            await sock.sendMessage(msg.chat, {
+                image: { url: image },
+                caption: `📺 *${a.title}*\n\n🎬 Episodes: ${a.episodes || 'Unknown'}\n📊 Status: ${a.status}\n⭐ Score: ${a.score || 'N/A'}\n\n📝 *Synopsis:*\n${synopsis}${FOOTER}`
             }, { quoted: msg });
-
-        } catch (error) {
-            console.error(error);
-            extra.reply('❌ Failed to fetch anime information.');
-        }
+        } catch(e) { await extra.reply('❌ Failed to fetch anime information.'); }
     }
 };
