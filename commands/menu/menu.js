@@ -1,3 +1,6 @@
+const path = require('path');
+const fs = require('fs');
+
 module.exports = {
     name: 'menu',
     aliases: ['help', 'all', 'commands'],
@@ -21,7 +24,7 @@ Yo, *${msg.pushName || 'Guest'}* !
 │ 🚀 Version : 3.4.0
 │ ⏳ Uptime : ${days}d ${hours}h ${minutes}m
 │ 👥 Users : 10,051
-│ 📅 Date : May 21, 2026
+│ 📅 Date : ${new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
 ╰───────────────╯
 
 ༺═━━〔 COMMAND CATEGORIES 〕━━═༻
@@ -69,12 +72,15 @@ Yo, *${msg.pushName || 'Guest'}* !
 
 > ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽£𝚇𝚄$`;
 
-        const sentMsg = await extra.reply(menu);
+        const menuImagePath = path.join(__dirname, '../../assets/menu.png');
         
-        setTimeout(async () => {
-            try {
-                await sock.sendMessage(msg.chat, { delete: sentMsg.key });
-            } catch (err) {}
-        }, 2400000);
+        if (fs.existsSync(menuImagePath)) {
+            await sock.sendMessage(msg.chat, {
+                image: fs.readFileSync(menuImagePath),
+                caption: menu
+            });
+        } else {
+            await extra.reply(menu);
+        }
     }
 };

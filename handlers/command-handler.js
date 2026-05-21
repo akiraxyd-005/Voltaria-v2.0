@@ -14,7 +14,7 @@ module.exports = async (sock, msg, extra, prefix, botName) => {
         // All command categories
         const categories = [
             'admin', 'ai', 'anime', 'audio', 'debug', 'download', 'economy', 
-            'fun', 'games', 'general', 'group', 'hentai', 'info', 'owner', 
+            'fun', 'games', 'general', 'group', 'hentai', 'info', 'menu', 'owner', 
             'reactions', 'religion', 'search', 'settings', 'session', 'text', 
             'textmaker', 'tools', 'whatsapp'
         ];
