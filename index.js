@@ -19,7 +19,7 @@ const commandHandler = require('./handlers/command-handler');
 const messageHandler = require('./handlers/message-handler');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 let latestQR = null;
 let isConnected = false;
