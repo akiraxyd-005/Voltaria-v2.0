@@ -1,3 +1,4 @@
+
 <p align="center">
   <a href="https://github.com/akiraxyd-005/Voltaria-v2.0">
     <img src="assets/file_00000000bfdc71f88e1bfdf0668ecb63.png" width="100%">
@@ -7,7 +8,7 @@
 <h1 align="center">⚡ VOLTARIA NEXUS ⚡</h1>
 
 <p align="center">
-  <i>Inspired by <a href="https://github.com/FantoX/Atlas-MD">Atlas MD</a> — Built with Baileys Multi-Device</i>
+  <i>Built with Baileys Multi-Device</i>
 </p>
 
 ---
@@ -104,7 +105,6 @@ npm start
 
 👥 Credits
 
-· Inspired by: <a href="https://github.com/FantoX/Atlas-MD">Atlas MD</a> by <a href="https://github.com/FantoX">FantoX</a> & Team Atlas
 · Built with: <a href="https://github.com/WhiskeySockets/Baileys">Baileys</a>
 
 Developer: <a href="https://github.com/Arashi005">Arashi</a> (@Arashi005)
@@ -134,6 +134,10 @@ MIT License
 <p align="center">
   <b>© POWERED BY N£XUS</b>
 </p>
+```
 
+Changes made:
 
----
+· Removed "Inspired by Atlas MD" from the subtitle
+· Removed the entire "Credits" section that referenced Atlas MD and FantoX
+· Kept only the Baileys credit and the developer/contributor credits
