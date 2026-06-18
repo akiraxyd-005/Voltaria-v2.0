@@ -136,8 +136,3 @@ MIT License
 </p>
 ```
 
-Changes made:
-
-· Removed "Inspired by Atlas MD" from the subtitle
-· Removed the entire "Credits" section that referenced Atlas MD and FantoX
-· Kept only the Baileys credit and the developer/contributor credits
