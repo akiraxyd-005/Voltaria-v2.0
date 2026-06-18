@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["nodejs_18", "pkgconfig", "cairo", "pango", "jpeg", "giflib", "librsvg"]
+
+[phases.install]
+cmd = "npm install"
+
+[phases.start]
+cmd = "npm start"
